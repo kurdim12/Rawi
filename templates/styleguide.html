@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+
+{% block head %}<link rel="stylesheet" href="/static/css/pages/styleguide.css">{% endblock %}
+
+{% block content %}
+<div class="page sg">
+
+  <!-- Hero -->
+  <header class="page-head sg-hero">
+    <span class="eyebrow">للفريق اللي بيبني راوي</span>
+    <h1 class="page-title">دليل التصميم</h1>
+    <p class="lede">ورق، حبر، وصوت واحد بلون الطين. كل إشي بهالصفحة حيّ: نفس المكوّنات اللي بتنبني فيها الصفحات، وبتشتغل بالفاتح والغامق.</p>
+    <div class="page-actions">
+      <div class="seg lg" role="group" aria-label="المظهر">
+        <button type="button" data-theme-set="light" aria-pressed="false"><span data-icon="sun"></span>فاتح</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false"><span data-icon="moon"></span>غامق</button>
+        <button type="button" data-theme-set="auto" aria-pressed="false"><span data-icon="auto"></span>تلقائي</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="sg-toc" aria-label="أقسام الدليل">
+    <a href="#brand">الهوية</a>
+    <a href="#color">الألوان</a>
+    <a href="#themes">الوضعين</a>
+    <a href="#type">الخط والأرقام</a>
+    <a href="#buttons">الأزرار</a>
+    <a href="#inputs">الحقول</a>
+    <a href="#chips">الشارات والناس</a>
+    <a href="#figures">المؤشرات</a>
+    <a href="#kcards">بطاقات المعرفة</a>
+    <a href="#voice">المحادثة والصوت</a>
+    <a href="#nav">التبويب والجداول</a>
+    <a href="#states">الحالات</a>
+    <a href="#a11y">الحركة والوصول</a>
+  </nav>
+
+  <!-- ٠١ Brand -->
+  <section class="sg-section" id="brand" aria-labelledby="h-brand">
+    <div class="sg-head"><span class="sg-num">٠١</span><div><h2 id="h-brand">الهوية</h2><p>ثلاث خطوط صوت بتعلى: ١٠ ثم ١٨ ثم ٢٦. صوت حدا بيحكي، وذاكرة عم تكبر.</p></div></div>
+    <div class="split">
+      <div class="panel sg-brand">
+        <div class="sg-brand-lockup">
+          <svg class="sg-brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg>
+          <div>
+            <p class="sg-wordmark">راوي</p>
+            <p class="sg-tagline">ذاكرة الشركة بصوت أصحابها</p>
+          </div>
+        </div>
+        <p class="sg-brand-note">لما حدا يطلع من الشركة، راوي بيقابله بالصوت وبالأردني، وبيحوّل كلامه لبطاقات معرفة مربوطة بصوته. المدير بيعتمدها، واللي جاي مكانه بيسأل وبيسمع الجواب بصوت صاحبه.</p>
+        <div class="sg-brand-sizes" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg>
+          <svg viewBox="0 0 32 32"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg>
+          <svg viewBox="0 0 32 32"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg>
+          <span class="sg-brand-ink"><svg viewBox="0 0 32 32"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg></span>
+        </div>
+      </div>
+      <ol class="sg-principles" role="list">
+        <li class="panel flat">
+          <span class="sg-principle-ico sg-accent-dot" aria-hidden="true"></span>
+          <div><h3>صوت واحد بلون</h3><p>لون الطين بس للصوت والتسجيل والزر الأساسي. إذا شفته، يا في حدا بيحكي، يا في خطوة لازم تعملها.</p></div>
+        </li>
+        <li class="panel flat">
+          <span class="sg-principle-ico" data-icon="book" aria-hidden="true"></span>
+          <div><h3>ورق وحبر</h3><p>خلفية دافية، خطوط رفيعة، ظلال ناعمة. الكلام والأرقام هم اللي بيحكوا، مش الزخرفة.</p></div>
+        </li>
+        <li class="panel flat">
+          <span class="sg-principle-ico sg-ar" aria-hidden="true">ع</span>
+          <div><h3>عربي من الأساس</h3><p>التخطيط كله بالخصائص المنطقية، الأرقام هندية وبخانات ثابتة، والكلام أردني: شو، هلق، بدّك، لسا.</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ٠٢ Color -->
+  <section class="sg-section" id="color" aria-labelledby="h-color">
+    <div class="sg-head"><span class="sg-num">٠٢</span><div><h2 id="h-color">الألوان</h2><p>الصفحات بتستعمل التوكنز بس، ولا مرة لون خام. القيم تحت بتتغيّر مع المظهر.</p></div></div>
+    <div class="sg-swatch-groups" id="sg-swatches"></div>
+  </section>
+
+  <!-- ٠٣ Both themes -->
+  <section class="sg-section" id="themes" aria-labelledby="h-themes">
+    <div class="sg-head"><span class="sg-num">٠٣</span><div><h2 id="h-themes">الوضعين مع بعض</h2><p>نفس التوكنز، قيم مختارة لكل وضع، مش قلب أوتوماتيكي. الغامق مش أسود: حبر دافي.</p></div></div>
+    <div class="sg-themes">
+      <div class="sg-theme" data-theme="light" id="sg-theme-light"></div>
+      <div class="sg-theme" data-theme="dark" id="sg-theme-dark"></div>
+    </div>
+  </section>
+
+  <!-- ٠٤ Type -->
+  <section class="sg-section" id="type" aria-labelledby="h-type">
+    <div class="sg-head"><span class="sg-num">٠٤</span><div><h2 id="h-type">الخط والأرقام</h2><p>IBM Plex Sans Arabic بأربع أوزان. النص ١٧ بكسل وسطر ١٫٨، والفقرة ما بتزيد عن ٦٤ حرف.</p></div></div>
+    <div class="split">
+      <div class="panel sg-type">
+        <div class="sg-type-row"><span class="sg-type-meta">٤٤ · عنوان الصفحة · ٧٠٠</span><p class="sg-t44">خبرة ٧ سنين ما رح تضيع</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">٣٢ · عنوان كبير · ٧٠٠</span><p class="sg-t32">ذاكرة الشركة بصوت أصحابها</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">٢٤ · قسم · ٦٠٠</span><p class="sg-t24">قرارات بتستناك هالأسبوع</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">٢٠ · عنوان لوحة · ٦٠٠</span><p class="sg-t20">جلسة التسليم مع عمر</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">١٧ · نص · ٤٠٠</span><p class="sg-t17">مع سما للاتصالات في اتفاق شفهي من سنتين: إذا دفعنا فاتورتهم قبل يوم ١٢ من الشهر بيعطونا خصم ٣٪ كاش. مش مكتوب بالعقد.</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">١٥ · ثانوي · ٥٠٠</span><p class="sg-t15">رنا سألت هالسؤال مبارح، وراوي رح يسأله لعمر بالجلسة الجاية.</p></div>
+        <div class="sg-type-row"><span class="sg-type-meta">١٣ · تفاصيل · ٥٠٠</span><p class="sg-t13">الجلسة ٢ · الجواب ٣ · قبل ٦ أيام</p></div>
+      </div>
+      <div class="stack">
+        <div class="panel sg-numerals">
+          <span class="eyebrow">أرقام العرض</span>
+          <p class="display-num" id="sg-num-hero">—</p>
+          <p class="muted small">قيمة المعرفة المحميّة هالسنة. الأرقام الكبيرة بخانات طبيعية، وبالجداول بخانات ثابتة.</p>
+        </div>
+        <div class="panel tight">
+          <div class="panel-head"><h3>مساعدات التنسيق</h3><span class="spacer"></span><span class="chip muted no-dot">مباشرة من <code dir="ltr">Rawi</code></span></div>
+          <table class="table sg-helpers" aria-label="مخرجات مساعدات التنسيق">
+            <thead><tr><th scope="col">الدالة</th><th scope="col">النتيجة</th></tr></thead>
+            <tbody id="sg-helpers"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ٠٥ Buttons -->
+  <section class="sg-section" id="buttons" aria-labelledby="h-buttons">
+    <div class="sg-head"><span class="sg-num">٠٥</span><div><h2 id="h-buttons">الأزرار</h2><p>زر أساسي واحد بالشاشة. ارتفاع ٤٤ بكسل على الأقل، حتى الصغير بمساحة لمس ٤٤.</p></div></div>
+    <div class="panel sg-demo-grid">
+      <div class="sg-demo">
+        <p class="sg-label">الأنواع</p>
+        <div class="cluster">
+          <button class="btn primary" type="button">شوف العرض الحي</button>
+          <button class="btn voice" type="button"><span data-icon="play"></span>اسمع عمر</button>
+          <button class="btn" type="button"><span data-icon="calendar"></span>جدولة جلسة</button>
+          <button class="btn ghost" type="button">إلغاء</button>
+          <button class="btn danger" type="button">رفض</button>
+        </div>
+      </div>
+      <div class="sg-demo">
+        <p class="sg-label">الأحجام</p>
+        <div class="cluster">
+          <button class="btn primary lg" type="button">ابدأ الجلسة<span data-icon="arrow"></span></button>
+          <button class="btn" type="button">عادي</button>
+          <button class="btn sm" type="button">صغير</button>
+          <button class="btn icon" type="button" aria-label="بحث"><span data-icon="search"></span></button>
+          <button class="btn icon sm ghost" type="button" aria-label="تعديل"><span data-icon="edit"></span></button>
+          <button class="btn icon voice" type="button" aria-label="احكي السؤال"><span data-icon="mic"></span></button>
+        </div>
+      </div>
+      <div class="sg-demo">
+        <p class="sg-label">الحالات</p>
+        <div class="cluster">
+          <button class="btn sm approve" type="button" aria-pressed="false" id="sg-approve-toggle">اعتماد</button>
+          <button class="btn sm approve" type="button" aria-pressed="true">✓ معتمدة</button>
+          <button class="btn" type="button" disabled>معطّل</button>
+          <button class="btn primary is-busy" type="button" aria-label="عم نحفظ">حفظ</button>
+          <button class="link-btn" type="button">كل الجلسات<span data-icon="chevron"></span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ٠٦ Inputs -->
+  <section class="sg-section" id="inputs" aria-labelledby="h-inputs">
+    <div class="sg-head"><span class="sg-num">٠٦</span><div><h2 id="h-inputs">الحقول</h2><p>تسمية فوق الحقل، تلميح تحته، وحلقة تركيز واضحة. الأرقام والأوقات بخانات ثابتة.</p></div></div>
+    <div class="panel">
+      <div class="grid cols-2 gap-lg">
+        <div class="stack">
+          <div class="search lg has-action">
+            <span data-icon="search"></span>
+            <label class="sr" for="sg-search">دوّر بذاكرة الشركة</label>
+            <input id="sg-search" type="search" placeholder="دوّر بذاكرة الشركة… مثلاً: خصم سما" autocomplete="off">
+            <button class="btn icon voice search-action" type="button" aria-label="احكي السؤال"><span data-icon="mic"></span></button>
+          </div>
+          <label class="field">المورد
+            <input type="text" value="سما للاتصالات">
+            <span class="field-hint">بنعبّيه من بطاقات عمر، وبتقدر تعدّله.</span>
+          </label>
+          <label class="field">الموظف
+            <select>
+              <option>عمر · المشتريات · باقيله ٩ أيام</option>
+              <option>هدى · المالية · باقيلها ٢١ يوم</option>
+              <option>يزن · المشاريع · باقيله ٣٤ يوم</option>
+              <option>ماجد · اللوجستيات · باقيله ٥ أيام</option>
+            </select>
+          </label>
+        </div>
+        <div class="stack">
+          <label class="field">أو اكتب الجواب
+            <textarea rows="3" placeholder="اكتب اللي بدّك تحكيه…"></textarea>
+          </label>
+          <div class="grid cols-2">
+            <label class="field">التاريخ<input type="date" value="2026-10-13"></label>
+            <label class="field">الساعة<input type="time" value="10:00"></label>
+          </div>
+          <label class="field">رقم بالدينار
+            <input type="text" value="٥٠٠٠" aria-invalid="true" inputmode="numeric">
+            <span class="field-error">السقف بدّه توقيع م. سامر بالقلم فوق هالرقم.</span>
+          </label>
+          <div class="cluster loose">
+            <label class="check"><input type="checkbox" checked> ضيف أسئلة رنا المفتوحة</label>
+            <label class="check"><input type="checkbox"> بس البطاقات الحرجة</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ٠٧ Chips & people -->
+  <section class="sg-section" id="chips" aria-labelledby="h-chips">
+    <div class="sg-head"><span class="sg-num">٠٧</span><div><h2 id="h-chips">الشارات والناس</h2><p>اللون ما بيحكي لحاله: كل شارة إلها كلمة، والحالات إلها نقطة.</p></div></div>
+    <div class="split even">
+      <div class="panel stack">
+        <div class="sg-demo"><p class="sg-label">الأنواع</p><div class="cluster" id="sg-chip-kinds"></div></div>
+        <div class="sg-demo"><p class="sg-label">الحالات <code dir="ltr">statusChip</code></p><div class="cluster" id="sg-chip-status"></div></div>
+        <div class="sg-demo"><p class="sg-label">الخطر <code dir="ltr">riskChip</code></p><div class="cluster" id="sg-chip-risk"></div></div>
+        <div class="sg-demo"><p class="sg-label">قفل · ثقة · حرجة · وسوم</p>
+          <div class="cluster loose" id="sg-chip-misc"></div>
+          <p class="sg-redacted" id="sg-redacted"></p>
+        </div>
+      </div>
+      <div class="panel stack">
+        <div class="sg-demo"><p class="sg-label">الأفاتار — لون ثابت لكل شخص</p><div class="sg-avatars" id="sg-avatars"></div></div>
+        <div class="sg-demo"><p class="sg-label">شخص بسطر</p><ul class="list-rows" id="sg-people"></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ٠٨ Figures -->
+  <section class="sg-section" id="figures" aria-labelledby="h-figures">
+    <div class="sg-head"><span class="sg-num">٠٨</span><div><h2 id="h-figures">المؤشرات</h2><p>رقم واحد بطل لكل بلاطة. الحلقة والعدّاد بلون المعنى، والخلفية درجة أفتح من نفس اللون.</p></div></div>
+    <div class="stats" id="sg-stats"></div>
+    <div class="split">
+      <div class="panel">
+        <div class="panel-head"><h3>التغطية لكل موظف مغادر</h3><span class="spacer"></span><span class="chip muted no-dot">قبل آخر يوم</span></div>
+        <div class="sg-rings" id="sg-rings"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><h3>عدّادات وخطوط</h3></div>
+        <div class="stack" id="sg-meters"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ٠٩ Knowledge cards -->
+  <section class="sg-section" id="kcards" aria-labelledby="h-kcards">
+    <div class="sg-head"><span class="sg-num">٠٩</span><div><h2 id="h-kcards">بطاقات المعرفة</h2><p>كل بطاقة مربوطة بجواب بصوت صاحبه. جرّب «اسمع»، «اعتماد» و«رفض»: نفس السلوك اللي بالصفحات.</p></div>
+      <span class="spacer"></span><button class="btn sm" type="button" id="sg-highlight"><span data-icon="spark"></span>جرّب التمييز</button></div>
+    <div class="kgrid" id="sg-kcards"></div>
+  </section>
+
+  <!-- ١٠ Voice -->
+  <section class="sg-section" id="voice" aria-labelledby="h-voice">
+    <div class="sg-head"><span class="sg-num">١٠</span><div><h2 id="h-voice">المحادثة والصوت</h2><p>فقاعة راوي إلها خط بلون الطين على البداية واسم صغير. فقاعة الشخص سادة. زر الكلام ٩٦ بكسل.</p></div></div>
+    <div class="split">
+      <div class="panel">
+        <div class="panel-head"><span class="pnum">١</span><h3>جلسة التسليم مع عمر</h3><span class="spacer"></span><span class="chip">مشتريات · باقيله ٩ أيام</span></div>
+        <div class="chat sg-chat" id="sg-chat" aria-live="polite"></div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <p class="sg-label">جرّب: اضغط وضلّك ضاغط</p>
+          <div class="ptt-wrap" id="sg-ptt-wrap">
+            <button class="ptt" id="sg-ptt" type="button" aria-label="اضغط واحكي — ضل ضاغط وانت بتحكي">
+              <span class="ptt-ring"></span><span class="ptt-ring r2"></span>
+              <span data-icon="mic"></span>
+            </button>
+            <div class="ptt-label">
+              <b id="sg-ptt-text">اضغط واحكي</b>
+              <span class="ptt-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="ptt-hint" id="sg-ptt-hint">عرض بس، بدون مايك. ضلّ ضاغط أو امسك زر المسافة.</span>
+            </div>
+          </div>
+          <div class="live-transcript" id="sg-live" hidden><b>عم بسمعك…</b><span id="sg-live-text"></span></div>
+        </div>
+        <div class="grid cols-2">
+          <div class="panel tight sg-ptt-state">
+            <p class="sg-label">جاهز</p>
+            <div class="ptt-wrap center">
+              <span class="ptt sm" aria-hidden="true"><span data-icon="mic"></span></span>
+            </div>
+          </div>
+          <div class="panel tight sg-ptt-state">
+            <p class="sg-label">عم يسجّل</p>
+            <div class="ptt-wrap center is-recording">
+              <span class="ptt sm" aria-hidden="true"><span class="ptt-ring"></span><span class="ptt-ring r2"></span><span data-icon="mic"></span></span>
+              <span class="ptt-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ١١ Tabs & tables -->
+  <section class="sg-section" id="nav" aria-labelledby="h-nav">
+    <div class="sg-head"><span class="sg-num">١١</span><div><h2 id="h-nav">التبويب والجداول</h2><p>الأسهم بتمشي مع اتجاه القراءة. الجدول بيصير بطاقات على الموبايل.</p></div>
+      <span class="spacer"></span>
+      <div class="seg" role="group" aria-label="العرض" id="sg-seg">
+        <button type="button" aria-pressed="true">جدول</button>
+        <button type="button" aria-pressed="false">بطاقات</button>
+      </div>
+    </div>
+    <div class="panel">
+      <div id="sg-tabs">
+        <div class="tabs" role="tablist" aria-label="الجلسات">
+          <button class="tab" role="tab" id="sg-tab-1" aria-controls="sg-tp-1" aria-selected="true">اليوم <span class="badge-count">٢</span></button>
+          <button class="tab" role="tab" id="sg-tab-2" aria-controls="sg-tp-2" aria-selected="false">الجاي <span class="badge-count">٣</span></button>
+          <button class="tab" role="tab" id="sg-tab-3" aria-controls="sg-tp-3" aria-selected="false">اللي خلص</button>
+        </div>
+        <div class="tabpanel" role="tabpanel" id="sg-tp-1" aria-labelledby="sg-tab-1" tabindex="0"></div>
+        <div class="tabpanel" role="tabpanel" id="sg-tp-2" aria-labelledby="sg-tab-2" tabindex="0" hidden></div>
+        <div class="tabpanel" role="tabpanel" id="sg-tp-3" aria-labelledby="sg-tab-3" tabindex="0" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ١٢ States -->
+  <section class="sg-section" id="states" aria-labelledby="h-states">
+    <div class="sg-head"><span class="sg-num">١٢</span><div><h2 id="h-states">الحالات والتنبيهات</h2><p>ولا صفحة فاضية: هيكل وقت التحميل، حالة فاضية لما ما في بيانات، وبديل لأي طلب بيفشل.</p></div></div>
+    <div class="grid cols-3">
+      <div class="panel stack">
+        <p class="sg-label">فاضي</p>
+        <div id="sg-empty"></div>
+      </div>
+      <div class="panel stack">
+        <div class="row"><p class="sg-label">تحميل</p><span class="spacer"></span><button class="btn sm" type="button" id="sg-reload"><span data-icon="refresh"></span>جرّب التحميل</button></div>
+        <div class="cards" id="sg-skeleton"></div>
+      </div>
+      <div class="panel stack">
+        <p class="sg-label">تنبيهات وصوت ونوافذ</p>
+        <div class="cluster">
+          <button class="btn sm" type="button" data-sg-toast="ok"><span data-icon="check"></span>تمّ</button>
+          <button class="btn sm" type="button" data-sg-toast="lock"><span data-icon="lock"></span>كلمة سر</button>
+          <button class="btn sm" type="button" data-sg-toast="info"><span data-icon="info"></span>معلومة</button>
+        </div>
+        <button class="btn voice" type="button" id="sg-audio"><span data-icon="play"></span>شغّل تسجيل تجريبي</button>
+        <div class="cluster">
+          <button class="btn" type="button" data-open-dialog="sg-dialog"><span data-icon="calendar"></span>نافذة جدولة</button>
+          <button class="btn" type="button" id="sg-open-sheet"><span data-icon="book"></span>درج جانبي</button>
+        </div>
+      </div>
+    </div>
+    <div class="grid cols-2">
+      <div class="callout info"><span data-icon="info"></span><div><b>وضع احتياطي</b><p>النموذج مش متصل هلق، وراوي شغّال بأسئلة وأجوبة جاهزة. كل إشي بضل يشتغل.</p></div></div>
+      <div class="callout warn"><span data-icon="alert"></span><div><b>ماجد بلا بديل</b><p>باقيله ٥ أيام وما في حدا مستلم. جدول جلسة هالأسبوع.</p></div></div>
+    </div>
+  </section>
+
+  <!-- ١٣ Motion & a11y -->
+  <section class="sg-section" id="a11y" aria-labelledby="h-a11y">
+    <div class="sg-head"><span class="sg-num">١٣</span><div><h2 id="h-a11y">الحركة والوصول</h2><p>الحركة إلها معنى أو ما في حركة.</p></div></div>
+    <ul class="sg-rules" role="list">
+      <li><span class="sg-rule-k">١٥٠–٢٥٠ms</span><span>انتقالات ease-out بس لما في تغيير حالة. الحلقات والأعمدة بتتحرك وقت التسجيل بس.</span></li>
+      <li><span class="sg-rule-k">حركة أقل</span><span>مع <code dir="ltr">prefers-reduced-motion</code> كل إشي بيوقف، والتسجيل بيبيّن حلقات وأعمدة ثابتة.</span></li>
+      <li><span class="sg-rule-k">٤٤ بكسل</span><span>أصغر مساحة لمس. الأزرار الصغيرة بتوسّع مساحتها بشكل مخفي.</span></li>
+      <li><span class="sg-rule-k">AA</span><span>تباين ٤٫٥:١ للنص بالوضعين، وحلقة تركيز ظاهرة بلون الحبر.</span></li>
+      <li><span class="sg-rule-k">aria-live</span><span>كلام راوي وهو بينكتب، والتنبيهات، بتنقرأ لقارئ الشاشة.</span></li>
+      <li><span class="sg-rule-k"><kbd>Space</kbd></span><span>بتمسك زر الكلام لما التركيز مش بحقل كتابة. <kbd>Esc</kbd> بيسكّر الدرج والنوافذ.</span></li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- Dialog: schedule a session -->
+<dialog class="dialog" id="sg-dialog" aria-labelledby="sg-dialog-title">
+  <form method="dialog" id="sg-dialog-form">
+    <div class="dialog-head">
+      <div class="stack tight">
+        <h2 id="sg-dialog-title">جدولة جلسة</h2>
+        <p>راوي رح يبلّش بالأسئلة المفتوحة، وبعدين بيكمل حسب المواضيع.</p>
+      </div>
+      <button class="btn icon sm ghost" type="button" data-close aria-label="سكّر"><span data-icon="x"></span></button>
+    </div>
+    <div class="dialog-body">
+      <label class="field">الموظف
+        <select><option>عمر · المشتريات</option><option>هدى · المالية</option><option>يزن · المشاريع</option><option>ماجد · اللوجستيات</option></select>
+      </label>
+      <div class="grid cols-2">
+        <label class="field">التاريخ<input type="date" value="2026-10-13"></label>
+        <label class="field">الساعة<input type="time" value="10:00"></label>
+      </div>
+      <fieldset class="sg-fieldset">
+        <legend class="field-label">المواضيع</legend>
+        <label class="check"><input type="checkbox" checked> الدفعات والخصومات</label>
+        <label class="check"><input type="checkbox" checked> بوابات الموردين</label>
+        <label class="check"><input type="checkbox"> استلام الحديد بالموقع</label>
+      </fieldset>
+      <div class="callout"><span data-icon="users"></span><p>في <b>٣ أسئلة</b> من رنا لسا ما انجاوبت. رح تنضاف لأول الجلسة.</p></div>
+    </div>
+    <div class="dialog-foot">
+      <button class="btn ghost" type="button" data-close>إلغاء</button>
+      <button class="btn primary" type="submit" value="ok">جدول الجلسة</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Sheet: card detail -->
+<dialog class="sheet" id="sg-sheet" aria-labelledby="sg-sheet-title">
+  <div class="dialog-head">
+    <div class="stack tight">
+      <span class="eyebrow">بطاقة معرفة</span>
+      <h2 id="sg-sheet-title">الخصم الشفهي مع سما للاتصالات</h2>
+    </div>
+    <button class="btn icon sm ghost" type="button" data-close aria-label="سكّر"><span data-icon="x"></span></button>
+  </div>
+  <div class="dialog-body" id="sg-sheet-body"></div>
+</dialog>
+{% endblock %}
+
+{% block scripts %}<script src="/static/js/pages/styleguide.js"></script>{% endblock %}
