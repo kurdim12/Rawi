@@ -895,14 +895,14 @@ button.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--i
 .table .cell-main { font-weight: 600; color: var(--ink); }
 .table .cell-sub { display: block; font-size: var(--fs-xs); color: var(--ink-2); font-weight: 400; }
 @media (max-width: 639.98px) {
-  .table.stack thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
-  .table.stack, .table.stack tbody, .table.stack tr, .table.stack td { display: block; width: 100%; }
-  .table.stack tr { padding: 12px 16px; border-block-end: 1px solid var(--line-2); }
-  .table.stack tbody tr:last-child { border-block-end: 0; }
-  .table.stack td { border: 0; padding: 3px 0; display: flex; justify-content: space-between; gap: var(--s-3); text-align: start; }
-  .table.stack td.num { text-align: start; }
-  .table.stack td::before { content: attr(data-label); color: var(--ink-2); font-size: var(--fs-xs); font-weight: 500; flex: none; }
-  .table.stack td[data-label=""]::before, .table.stack td:not([data-label])::before { display: none; }
+  .table.stacked thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .table.stacked, .table.stacked tbody, .table.stacked tr, .table.stacked td { display: block; width: 100%; }
+  .table.stacked tr { padding: 12px 16px; border-block-end: 1px solid var(--line-2); }
+  .table.stacked tbody tr:last-child { border-block-end: 0; }
+  .table.stacked td { border: 0; padding: 3px 0; display: flex; justify-content: space-between; gap: var(--s-3); text-align: start; }
+  .table.stacked td.num { text-align: start; }
+  .table.stacked td::before { content: attr(data-label); color: var(--ink-2); font-size: var(--fs-xs); font-weight: 500; flex: none; }
+  .table.stacked td[data-label=""]::before, .table.stacked td:not([data-label])::before { display: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -985,6 +985,7 @@ button.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--i
 .kcard.compact { padding: 14px 16px; gap: 6px; }
 .kcard.compact .kfact { font-size: var(--fs-sm); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .kcard.compact .ktitle { font-size: 16px; }
+.kcard.compact .ksrc .icon { display: none; }
 .kcard.is-highlight, .kcard.pulse { animation: rawi-pulse .9s var(--ease) 2; }
 .kcard.is-clickable { cursor: pointer; }
 .kcard.is-clickable:hover { border-color: var(--line-strong); box-shadow: var(--shadow); }

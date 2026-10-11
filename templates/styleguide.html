@@ -108,10 +108,7 @@
         </div>
         <div class="panel tight">
           <div class="panel-head"><h3>مساعدات التنسيق</h3><span class="spacer"></span><span class="chip muted no-dot">مباشرة من <code dir="ltr">Rawi</code></span></div>
-          <table class="table sg-helpers" aria-label="مخرجات مساعدات التنسيق">
-            <thead><tr><th scope="col">الدالة</th><th scope="col">النتيجة</th></tr></thead>
-            <tbody id="sg-helpers"></tbody>
-          </table>
+          <ul class="list-rows sg-helpers" id="sg-helpers" aria-label="مخرجات مساعدات التنسيق"></ul>
         </div>
       </div>
     </div>
@@ -346,10 +343,10 @@
   <section class="sg-section" id="a11y" aria-labelledby="h-a11y">
     <div class="sg-head"><span class="sg-num">١٣</span><div><h2 id="h-a11y">الحركة والوصول</h2><p>الحركة إلها معنى أو ما في حركة.</p></div></div>
     <ul class="sg-rules" role="list">
-      <li><span class="sg-rule-k">١٥٠–٢٥٠ms</span><span>انتقالات ease-out بس لما في تغيير حالة. الحلقات والأعمدة بتتحرك وقت التسجيل بس.</span></li>
+      <li><span class="sg-rule-k">أقل من ربع ثانية</span><span>انتقالات بين ١٥٠ و٢٥٠ ملّي ثانية، وبس لما في تغيير حالة. الحلقات والأعمدة بتتحرك وقت التسجيل بس.</span></li>
       <li><span class="sg-rule-k">حركة أقل</span><span>مع <code dir="ltr">prefers-reduced-motion</code> كل إشي بيوقف، والتسجيل بيبيّن حلقات وأعمدة ثابتة.</span></li>
       <li><span class="sg-rule-k">٤٤ بكسل</span><span>أصغر مساحة لمس. الأزرار الصغيرة بتوسّع مساحتها بشكل مخفي.</span></li>
-      <li><span class="sg-rule-k">AA</span><span>تباين ٤٫٥:١ للنص بالوضعين، وحلقة تركيز ظاهرة بلون الحبر.</span></li>
+      <li><span class="sg-rule-k">AA</span><span>تباين النص ٤٫٥ لـ ١ على الأقل بالوضعين، وحلقة تركيز ظاهرة بلون الحبر.</span></li>
       <li><span class="sg-rule-k">aria-live</span><span>كلام راوي وهو بينكتب، والتنبيهات، بتنقرأ لقارئ الشاشة.</span></li>
       <li><span class="sg-rule-k"><kbd>Space</kbd></span><span>بتمسك زر الكلام لما التركيز مش بحقل كتابة. <kbd>Esc</kbd> بيسكّر الدرج والنوافذ.</span></li>
     </ul>

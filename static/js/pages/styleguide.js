@@ -112,7 +112,7 @@
   const SWATCHES = [
     { title: 'السطوح', items: [
       ['--bg', 'الورق — خلفية الصفحة'], ['--surface', 'سطح اللوحات والبطاقات'], ['--surface-2', 'سطح ثانوي، فقاعة الشخص'],
-      ['--surface-3', 'غاطس — مسارات وأزرار مقسّمة'], ['--sidebar', 'القائمة الجانبية'],
+      ['--surface-3', 'غاطس — مسارات ومقسّم'], ['--sidebar', 'القائمة الجانبية'],
     ] },
     { title: 'الحبر والخطوط', items: [
       ['--ink', 'النص الأساسي'], ['--ink-2', 'نص ثانوي'], ['--ink-3', 'تفاصيل وتلميحات'],
@@ -121,10 +121,12 @@
     { title: 'الصوت — للتسجيل والزر الأساسي بس', items: [
       ['--accent', 'زر الكلام، الزر الأساسي'], ['--accent-hover', 'ضغط ومرور'], ['--accent-text', 'نص بلون الصوت'], ['--accent-soft', 'خلفية الصوت'],
     ] },
-    { title: 'الحالات — دايماً مع كلمة', items: [
-      ['--ok', 'معتمدة، تمام'], ['--ok-soft', 'خلفية تمام'], ['--warn', 'بانتظار، انتبه'], ['--warn-soft', 'خلفية انتبه'],
-      ['--risk', 'خطر عالي'], ['--risk-soft', 'خلفية خطر'], ['--info', 'مجدولة، معلومة'], ['--info-soft', 'خلفية معلومة'],
-      ['--hl', 'ناقص بالرسمي'],
+    { title: 'الحالات — دايماً مع كلمة ونقطة', items: [
+      ['--ok', 'معتمدة، تمام', '--ok-soft', ['معتمدة', 'ok']],
+      ['--warn', 'بانتظار، انتبه', '--warn-soft', ['بانتظار المراجعة', 'warn']],
+      ['--risk', 'خطر عالي', '--risk-soft', ['خطر عالي', 'risk']],
+      ['--info', 'مجدولة، معلومة', '--info-soft', ['مجدولة', 'info']],
+      ['--hl', 'ناقص بالرسمي', '--hl-line', ['ناقص بالرسمي', 'hl']],
     ] },
   ];
   function renderSwatches() {
@@ -134,13 +136,14 @@
       <div class="sg-swatch-group">
         <h3 class="sg-group-title">${esc(g.title)}</h3>
         <div class="sg-swatch-grid">
-          ${g.items.map(([tok, role]) => `
-            <div class="sg-swatch">
-              <span class="sg-swatch-color" style="background:var(${tok})"></span>
+          ${g.items.map(([tok, role, soft, sample]) => `
+            <div class="sg-swatch${soft ? ' is-pair' : ''}">
+              <span class="sg-swatch-color" style="background:var(${tok})">${soft ? `<span class="sg-swatch-soft" style="background:var(${soft})"></span>` : ''}</span>
               <span class="sg-swatch-meta">
                 <code dir="ltr">${tok}</code>
                 <span class="sg-hex" data-token="${tok}" dir="ltr"></span>
                 <span class="sg-role">${esc(role)}</span>
+                ${sample ? ui.chip(sample[0], sample[1]) : ''}
               </span>
             </div>`).join('')}
         </div>
@@ -189,13 +192,15 @@
       ['Rawi.num(48600)', esc(R.num(48600))],
       ['Rawi.jod(48600)', esc(R.jod(48600))],
       ['Rawi.pct(0.52)', esc(R.pct(0.52))],
-      ["Rawi.date(today, {weekday})", esc(R.date(R.today(), { weekday: true }))],
-      ['Rawi.relDay(+1 · −1 · +3 · −6)', esc([1, -1, 3, -6].map((d) => R.relDay(isoIn(d))).join(' · '))],
+      ['Rawi.date(today, {weekday: true})', esc(R.date(R.today(), { weekday: true }))],
+      ['Rawi.relDay(+1)', esc(R.relDay(isoIn(1)))],
+      ['Rawi.relDay(-6)', esc(R.relDay(isoIn(-6)))],
+      ['Rawi.relDay(+3)', esc(R.relDay(isoIn(3)))],
       ['Rawi.duration(185)', esc(R.duration(185))],
       ['Rawi.mask("كلمة السر هي Nakheel2026")', rich(R.mask('كلمة السر هي Nakheel2026').text)],
     ];
     const tb = $('#sg-helpers');
-    if (tb) tb.innerHTML = rows.map(([k, v]) => `<tr><td><code dir="ltr">${esc(k)}</code></td><td class="sg-helper-out">${v}</td></tr>`).join('');
+    if (tb) tb.innerHTML = rows.map(([k, v]) => `<li><span class="sg-helper-out">${v}</span><code dir="ltr">${esc(k)}</code></li>`).join('');
   }
 
   /* ------------------------------------------------------------------------
@@ -444,7 +449,7 @@
           <div class="cluster">${ui.statusChip(s.status)}<span class="small muted">${esc(R.relDay(s.date))} · ${esc(ar(s.time))}</span></div></div>`;
       }).join('')}</div>`;
     }
-    return `<div class="table-wrap"><table class="table stack">
+    return `<div class="table-wrap"><table class="table stacked">
       <thead><tr><th scope="col">الموظف</th><th scope="col">الجلسة</th><th scope="col">الموعد</th><th scope="col" class="num">المدة</th><th scope="col">الحالة</th></tr></thead>
       <tbody>${list.map((s) => {
         const p = P[s.employee_id];
@@ -452,7 +457,7 @@
           <td data-label="الموظف"><span class="person">${ui.avatar(p, 32)}<span class="person-text"><span class="cell-main">${esc(p.name)}</span><span class="cell-sub">${esc(p.dept)}</span></span></span></td>
           <td data-label="الجلسة">${esc(s.title)}</td>
           <td data-label="الموعد"><span class="nowrap">${esc(R.date(s.date, { weekday: true }))}</span><span class="cell-sub">${esc(R.relDay(s.date))} · ${esc(ar(s.time))}</span></td>
-          <td data-label="المدة" class="num">${s.duration_min ? esc(R.duration(s.duration_min * 60)) : '—'}</td>
+          <td data-label="المدة" class="num">${s.duration_min ? `${esc(ar(s.duration_min))} دقيقة` : '—'}</td>
           <td data-label="الحالة">${ui.statusChip(s.status)}</td>
         </tr>`;
       }).join('')}</tbody></table></div>`;
