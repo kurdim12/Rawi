@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/onboarding.css">{% endblock %}
+{% block content %}
+<div class="ob stack loose" id="ob">
+  <div class="ob-top cluster">
+    <span class="eyebrow">الموظف الجديد</span>
+    <span class="spacer"></span>
+    <nav class="seg ob-switch" id="ob-switch" aria-label="اختار الموظف الجديد">
+      <a href="/onboarding/rana">رنا</a>
+      <a href="/onboarding/dana">دانة</a>
+      <a href="/onboarding/tareq">طارق</a>
+    </nav>
+  </div>
+
+  <section class="ob-hero panel" id="ob-hero" aria-live="polite">
+    <div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i><i></i></div>
+  </section>
+
+  <section class="ob-ask panel" aria-labelledby="ob-ask-title">
+    <div class="panel-head"><h2 id="ob-ask-title">اسأل راوي</h2><span class="spacer"></span><span class="chip muted no-dot" id="ob-ask-src">من كلام اللي قبلك</span></div>
+    <form class="ob-ask-form" id="ob-ask-form" autocomplete="off">
+      <label class="sr" for="ob-q">سؤالك</label>
+      <input class="ob-ask-input" id="ob-q" name="q" type="text" placeholder="مثلاً: مين المورد اللي بنعتمد عليه بالكوابل؟" maxlength="400">
+      <button class="btn icon ob-mic" id="ob-mic" type="button" aria-label="احكي سؤالك" hidden>
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      </button>
+      <button class="btn primary" id="ob-ask-btn" type="submit">اسأل</button>
+    </form>
+    <div class="cluster ob-sugg" id="ob-sugg" aria-label="أسئلة مقترحة"></div>
+    <div class="ob-answer" id="ob-answer" aria-live="polite" hidden></div>
+  </section>
+
+  <div class="split ob-split">
+    <section class="panel stack" aria-labelledby="ob-path-title">
+      <div class="panel-head"><h2 id="ob-path-title">مسار التعلّم</h2><span class="spacer"></span><span class="chip muted no-dot" id="ob-path-count"></span></div>
+      <div class="stack" id="ob-path"><div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i><i></i></div><div class="skel" aria-hidden="true"><i></i><i></i><i></i></div></div>
+    </section>
+
+    <div class="stack">
+      <section class="panel stack" aria-labelledby="ob-check-title">
+        <div class="panel-head"><h2 id="ob-check-title">أول ٣٠ يوم</h2><span class="spacer"></span><span class="chip muted no-dot" id="ob-check-count"></span></div>
+        <div class="ob-progress" id="ob-check-meter"></div>
+        <div class="stack tight" id="ob-check"><div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i><i></i></div></div>
+      </section>
+
+      <section class="panel stack" aria-labelledby="ob-qs-title">
+        <div class="panel-head"><h2 id="ob-qs-title">أسئلتك</h2><span class="spacer"></span><span class="chip muted no-dot" id="ob-qs-count"></span></div>
+        <div class="stack tight" id="ob-qs"><div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i></div></div>
+      </section>
+
+      <section class="panel stack" aria-labelledby="ob-people-title">
+        <div class="panel-head"><h2 id="ob-people-title">ناس لازم تعرفهم</h2></div>
+        <div class="stack tight" id="ob-people"><div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i></div></div>
+      </section>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/onboarding.js"></script>{% endblock %}

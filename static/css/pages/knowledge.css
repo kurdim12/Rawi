@@ -1,0 +1,80 @@
+/* Rawi — قاعدة المعرفة */
+.kb { display: grid; gap: var(--s-5, 20px); min-width: 0; }
+.kb > * { min-width: 0; }
+
+.kb-stats { min-width: 0; }
+
+.kb-search-panel { display: grid; gap: var(--s-4, 16px); }
+.kb-ask { display: flex; gap: var(--s-3, 12px); align-items: stretch; flex-wrap: wrap; }
+.kb-search { flex: 1 1 280px; min-width: 0; }
+.kb-search > .icon:first-child {
+  position: absolute; inset-inline-start: 16px; width: 20px; height: 20px;
+  color: var(--ink-3); pointer-events: none;
+}
+.kb-search input { width: 100%; padding-inline-start: 46px; }
+.kb-ask-btn { min-height: 56px; padding-inline: 22px; flex: 0 0 auto; }
+@media (max-width: 560px) { .kb-ask-btn { flex: 1 1 100%; min-height: 48px; } }
+
+.kb-answer { display: grid; gap: var(--s-3, 12px); }
+.kb-answer[hidden] { display: none; }
+.kb-thinking { display: flex; align-items: center; gap: 8px; color: var(--ink-2); font-size: var(--fs-sm); }
+.kb-thinking .icon { width: 18px; height: 18px; color: var(--accent); }
+.kb-ans {
+  background: var(--accent-soft); border: 1px solid var(--accent-line);
+  border-radius: 14px; padding: 16px 18px; display: grid; gap: 6px;
+}
+.kb-ans .eyebrow { display: inline-flex; align-items: center; gap: 6px; color: var(--accent-text); }
+.kb-ans .eyebrow .icon { width: 16px; height: 16px; }
+.kb-ans-text { font-size: var(--fs-md, 18px); line-height: 1.8; color: var(--ink); }
+.kb-ans.is-unknown { background: var(--surface-2); border-color: var(--line-2); }
+.kb-src { display: grid; gap: 6px; }
+
+.kb-filters {
+  display: flex; flex-wrap: wrap; align-items: end; gap: var(--s-3, 12px) var(--s-4, 16px);
+}
+.kb-field { flex: 1 1 180px; min-width: 0; }
+.kb-field select { width: 100%; }
+.kb-status-wrap { display: grid; gap: 6px; flex: 0 1 auto; }
+.kb-flabel { font-size: var(--fs-sm); color: var(--ink-2); font-weight: 500; }
+.kb-status-wrap .seg { max-width: 100%; overflow-x: auto; }
+.kb-crit { flex: 0 0 auto; min-height: 40px; display: inline-flex; align-items: center; }
+
+.kb-results-head { display: flex; align-items: center; gap: var(--s-3, 12px); margin-block-end: calc(-1 * var(--s-2, 8px)); }
+.kb-h2 { font-size: var(--fs-lg, 20px); font-weight: 700; }
+
+.kb-gaps { display: grid; gap: var(--s-3, 12px); }
+.kb-gaps-body { display: grid; gap: var(--s-4, 16px); grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr)); }
+.kb-gaps-body > .empty, .kb-gaps-body > .skel { grid-column: 1 / -1; }
+.kb-gap-group {
+  border: 1px solid var(--line-2); border-radius: 14px; background: var(--surface-2);
+  padding: 14px; display: grid; gap: 10px; min-width: 0;
+}
+.kb-gap-person { display: flex; align-items: center; gap: 10px; }
+.kb-gap-person > div { display: grid; min-width: 0; }
+.kb-gap-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.kb-gap {
+  background: var(--surface); border: 1px solid var(--line-2); border-radius: 10px;
+  padding: 10px 12px; display: grid; gap: 6px;
+}
+.kb-gap p { line-height: 1.7; overflow-wrap: anywhere; }
+.kb-gap-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+/* detail */
+.kb-dialog .dialog-body { display: grid; gap: var(--s-4, 16px); }
+.kb-fact { font-size: var(--fs-md, 18px); line-height: 1.85; color: var(--ink); overflow-wrap: anywhere; }
+.kb-value {
+  display: inline-flex; align-items: baseline; gap: 8px; flex-wrap: wrap;
+  background: var(--ok-soft); border: 1px solid var(--ok-line); color: var(--ok-text);
+  border-radius: 12px; padding: 10px 14px; justify-self: start;
+}
+.kb-value b { font-size: var(--fs-lg, 20px); }
+.kb-who { display: flex; align-items: center; gap: 12px; }
+.kb-who > div { display: grid; min-width: 0; }
+.kb-sess { display: grid; gap: 2px; padding: 12px 14px; border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line-2); }
+.kb-qa { display: grid; gap: 10px; }
+.kb-qq, .kb-tr { display: grid; gap: 4px; line-height: 1.8; overflow-wrap: anywhere; }
+.kb-tr {
+  margin: 0; padding: 12px 14px; border-inline-start: 3px solid var(--accent);
+  background: var(--hl); color: var(--ink); border-radius: 10px;
+}
+.kb-dact { padding-block-start: 4px; }

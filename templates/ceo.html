@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block head %}<link rel="stylesheet" href="/static/css/pages/ceo.css">{% endblock %}
+
+{% block content %}
+<div class="page ceo">
+
+  <header class="page-head ceo-hero">
+    <span class="eyebrow" id="ceo-greet">أهلاً م. نادر</span>
+    <h1 class="page-title ceo-headline" id="ceo-headline" aria-live="polite"><span class="skel ceo-skel-line" aria-hidden="true"><i></i></span></h1>
+    <p class="lede" id="ceo-sub">صورة وحدة عن المعرفة اللي ممكن تطلع من الشركة، وشو لازم تقرّر اليوم.</p>
+  </header>
+
+  <section class="section" aria-labelledby="ceo-kpi-h">
+    <h2 class="sr" id="ceo-kpi-h">الأرقام الأساسية</h2>
+    <div class="ceo-kpis" id="ceo-kpis"></div>
+  </section>
+
+  <section class="section" aria-labelledby="ceo-dec-h">
+    <div class="section-head">
+      <h2 id="ceo-dec-h">قرارات بتستناك</h2>
+      <span class="spacer"></span>
+      <p>مرتّبة حسب الخطر</p>
+    </div>
+    <div class="ceo-decisions" id="ceo-decisions"></div>
+  </section>
+
+  <div class="grid ceo-main">
+    <section class="panel ceo-matrix-panel" aria-labelledby="ceo-matrix-h">
+      <div class="panel-head">
+        <h3 id="ceo-matrix-h">خريطة الخطر</h3>
+        <span class="spacer"></span>
+        <span class="chip muted no-dot">الأيام الباقية × التغطية</span>
+      </div>
+      <p class="panel-sub">كل دائرة موظف مغادر، وحجمها قدّ قيمة المعرفة اللي لسّا مش موثّقة.</p>
+      <div class="ceo-matrix" id="ceo-matrix"></div>
+      <div class="legend ceo-legend" id="ceo-matrix-legend"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="ceo-cov-h">
+      <div class="panel-head">
+        <h3 id="ceo-cov-h">التغطية لكل موظف</h3>
+        <span class="spacer"></span>
+        <span class="chip muted no-dot">قبل آخر يوم</span>
+      </div>
+      <div class="ceo-cov" id="ceo-cov"></div>
+      <div class="ceo-depts" id="ceo-depts"></div>
+    </section>
+  </div>
+
+  <section class="panel" aria-labelledby="ceo-trend-h">
+    <div class="panel-head">
+      <h3 id="ceo-trend-h">النشاط آخر ١٤ يوم</h3>
+      <span class="spacer"></span>
+      <div class="legend" id="ceo-trend-legend"></div>
+    </div>
+    <div class="ceo-trend" id="ceo-trend"></div>
+  </section>
+
+</div>
+{% endblock %}
+
+{% block scripts %}<script src="/static/js/pages/ceo.js"></script>{% endblock %}

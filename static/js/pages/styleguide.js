@@ -287,8 +287,8 @@
     const box = $('#sg-kcards');
     if (!box) return;
     box.innerHTML = [
-      ui.kcard(CARDS[0], { actions: ['listen', 'approve', 'open'] }),
-      ui.kcard(CARDS[1], { actions: ['listen', 'approve', 'reject', 'edit'] }),
+      ui.kcard(CARDS[0], { people: P, source: 'session', actions: ['listen', 'approve', 'open'] }),
+      ui.kcard(CARDS[1], { people: P, source: 'session', actions: ['listen', 'approve', 'reject', 'edit'] }),
       ui.kcard(CARDS[2], { people: P, actions: ['approve', 'reject', 'open'] }),
       ui.kcard(CARDS[3], { people: P, actions: ['reject'], compact: true }),
     ].join('');

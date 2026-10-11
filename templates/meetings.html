@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/meetings.css">{% endblock %}
+{% block content %}
+<div class="page mt">
+  <header class="page-head">
+    <span class="eyebrow">جدول جلسات التسليم</span>
+    <h1 class="page-title">الجلسات</h1>
+    <p class="lede">كل جلسة بتطلّع معرفة من راس صاحبها قبل ما يطلع. هون بتشوف شو صار اليوم، شو الجاي، وشو اللي خلص وطلع منه.</p>
+    <div class="page-actions">
+      <button class="btn primary" type="button" id="mt-open" disabled>جدولة جلسة</button>
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="mt-people-h">
+    <div class="section-head">
+      <h2 id="mt-people-h">وين وصلنا مع كل واحد</h2>
+      <span class="spacer"></span>
+      <p id="mt-people-sub"></p>
+    </div>
+    <div class="mt-strip" id="mt-strip" aria-busy="true"></div>
+  </section>
+
+  <section class="section" aria-labelledby="mt-today-h">
+    <div class="section-head">
+      <h2 id="mt-today-h">اليوم</h2>
+      <span class="spacer"></span>
+      <p id="mt-today-sub"></p>
+    </div>
+    <div class="stack tight" id="mt-today" aria-busy="true"></div>
+  </section>
+
+  <section class="section" aria-labelledby="mt-next-h">
+    <div class="section-head">
+      <h2 id="mt-next-h">الجاي</h2>
+      <span class="spacer"></span>
+      <p id="mt-next-sub"></p>
+    </div>
+    <div class="stack" id="mt-next" aria-busy="true"></div>
+  </section>
+
+  <section class="section" aria-labelledby="mt-done-h">
+    <div class="section-head">
+      <h2 id="mt-done-h">اللي خلص</h2>
+      <span class="spacer"></span>
+      <p id="mt-done-sub"></p>
+    </div>
+    <div class="grid auto" id="mt-done" aria-busy="true"></div>
+  </section>
+</div>
+
+<dialog class="dialog" id="mt-dialog" aria-labelledby="mt-dialog-title">
+  <form method="dialog" id="mt-form" novalidate>
+    <div class="dialog-head">
+      <div class="stack tight">
+        <h2 id="mt-dialog-title">جدولة جلسة</h2>
+        <p>راوي رح يبلّش بالأسئلة المفتوحة، وبعدين بيكمّل حسب المواضيع اللي بتختارها.</p>
+      </div>
+      <button class="btn icon sm ghost" type="button" data-close aria-label="سكّر">×</button>
+    </div>
+    <div class="dialog-body stack">
+      <label class="field">مع مين الجلسة؟
+        <select id="mt-person" name="employee_id" required></select>
+      </label>
+      <div class="grid mt-two">
+        <label class="field">التاريخ<input type="date" id="mt-date" name="date" required></label>
+        <label class="field">الساعة<input type="time" id="mt-time" name="time" value="10:00" required></label>
+      </div>
+      <label class="field">عنوان الجلسة <span class="field-hint">اختياري، إذا فاضي بنسمّيها من المواضيع</span>
+        <input type="text" id="mt-title" name="title" maxlength="80" autocomplete="off">
+      </label>
+      <fieldset class="mt-fieldset">
+        <legend class="field-label">المواضيع اللي لسا ما انغطّت</legend>
+        <div class="mt-checks" id="mt-topics"></div>
+      </fieldset>
+      <fieldset class="mt-fieldset">
+        <legend class="field-label">أسئلة مفتوحة تنضاف لأول الجلسة</legend>
+        <div class="mt-checks" id="mt-questions"></div>
+      </fieldset>
+      <p class="field-error" id="mt-error" role="alert" hidden></p>
+    </div>
+    <div class="dialog-foot">
+      <button class="btn ghost" type="button" data-close>إلغاء</button>
+      <button class="btn primary" type="submit" id="mt-submit">جدول الجلسة</button>
+    </div>
+  </form>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/meetings.js"></script>{% endblock %}

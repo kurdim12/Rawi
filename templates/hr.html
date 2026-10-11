@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/hr.css">{% endblock %}
+{% block content %}
+<div class="page hr">
+  <header class="page-head">
+    <span class="eyebrow">الموارد البشرية · سلمى</span>
+    <h1 class="page-title">مين طالع، ووين وصل تسليمه</h1>
+    <p class="lede">كل موظف مغادر بمرحلته، الوصف الرسمي جنب الوصف الحقيقي لكل وظيفة، وتقرير خروج جاهز للطباعة.</p>
+  </header>
+
+  <div id="hr-alert" class="hr-alert-slot"></div>
+
+  <section class="stats" id="hr-stats" aria-label="أرقام سريعة"></section>
+
+  <section class="hr-section" aria-labelledby="hr-pipe-title">
+    <div class="hr-section-head">
+      <h2 id="hr-pipe-title">مسار المغادرين</h2>
+      <p class="muted small">اضغط على أي اسم عشان تفتح تقرير الخروج تبعه.</p>
+    </div>
+    <div class="hr-pipeline" id="hr-pipeline"></div>
+  </section>
+
+  <section class="hr-section" aria-labelledby="hr-roles-title">
+    <div class="hr-section-head">
+      <h2 id="hr-roles-title">الوظائف: الرسمي مقابل الحقيقي</h2>
+      <p class="muted small">اللي مكتوب بالوصف الوظيفي، واللي الموظف فعلياً بيعمله حسب البطاقات المعتمدة.</p>
+    </div>
+    <div class="panel hr-roles" id="hr-roles"></div>
+  </section>
+</div>
+
+<dialog class="dialog hr-report" id="hr-report" aria-labelledby="hr-report-title">
+  <div class="dialog-head">
+    <div class="stack tight">
+      <span class="eyebrow">تقرير خروج</span>
+      <h2 id="hr-report-title">تقرير الخروج</h2>
+    </div>
+    <button class="btn icon sm ghost hr-no-print" type="button" data-close aria-label="سكّر" id="hr-report-x"></button>
+  </div>
+  <div class="dialog-body" id="hr-report-body"></div>
+  <div class="dialog-foot hr-no-print">
+    <button class="btn ghost" type="button" data-close>سكّر</button>
+    <button class="btn primary" type="button" id="hr-print">اطبع</button>
+  </div>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/hr.js"></script>{% endblock %}

@@ -516,8 +516,9 @@
   /**
    * Knowledge card.
    * @param {object} card {id, title, fact, tags, confidence, status, critical, audio_url, session_id, answer_index, employee_id, value_jod_year?}
-   * @param {{people?: (object[]|Object<string,object>|true), actions?: string[], compact?: boolean, highlight?: boolean}} [opts]
+   * @param {{people?: (object[]|Object<string,object>|true), actions?: string[], compact?: boolean, highlight?: boolean, source?: 'person'|'session'}} [opts]
    *   people: when given, the source chip reads «عمر · المشتريات» (true = use the store's people);
+   *   source: force the chip format ('session' keeps «الجلسة ٢ · الجواب ٣» even with people);
    *   actions: any of 'listen','approve','reject','edit','open' (default ['listen']).
    *   'listen' renders only when card.audio_url exists.
    * @returns {string} HTML — root has data-card-id; buttons have data-action
@@ -532,7 +533,7 @@
     const fname = person ? firstName(person) : '';
 
     let src;
-    if (o.people && person) {
+    if (person && (o.source === 'person' || (o.people && o.source !== 'session'))) {
       src = [person.name, person.dept].filter(Boolean).join(' · ');
     } else {
       const parts = [];

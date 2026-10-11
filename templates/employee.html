@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}<link rel="stylesheet" href="/static/css/pages/employee.css">{% endblock %}
+
+{% block content %}
+<div class="page emp">
+  <nav class="emp-switch" aria-label="اختار الموظف المغادر">
+    <div class="seg" role="group" aria-label="الموظفين المغادرين" id="emp-switch"></div>
+  </nav>
+
+  <header class="panel emp-hero" id="emp-hero" aria-live="polite">
+    <div class="emp-hero-skel"><div class="skel" role="status"><span class="sr">عم نحمّل…</span><i></i><i></i><i></i></div></div>
+  </header>
+
+  <div class="emp-grid">
+    <section class="panel emp-next" aria-labelledby="emp-next-h">
+      <div class="panel-head"><h2 id="emp-next-h">جلستك الجاية</h2></div>
+      <div id="emp-next"><div class="skel" aria-hidden="true"><i></i><i></i></div></div>
+    </section>
+
+    <section class="panel emp-questions" aria-labelledby="emp-q-h">
+      <div class="panel-head"><h2 id="emp-q-h">أسئلة بتستناك</h2><span class="spacer"></span><span id="emp-q-count"></span></div>
+      <ul class="list-rows" id="emp-questions"><li><div class="skel" aria-hidden="true"><i></i><i></i></div></li></ul>
+    </section>
+  </div>
+
+  <section class="panel emp-topics" aria-labelledby="emp-t-h">
+    <div class="panel-head"><h2 id="emp-t-h">المواضيع</h2><span class="spacer"></span><span class="small muted" id="emp-t-sub"></span></div>
+    <div class="emp-topic-cols" id="emp-topics"><div class="skel" aria-hidden="true"><i></i><i></i><i></i></div></div>
+  </section>
+
+  <section class="section emp-cards" aria-labelledby="emp-c-h">
+    <div class="section-head"><h2 id="emp-c-h">بطاقاتك</h2><span class="spacer"></span><span class="small muted">كل بطاقة مربوطة بصوتك من الجلسة</span></div>
+    <div id="emp-cards"><div class="kgrid"><div class="skel" aria-hidden="true"><i></i><i></i><i></i></div><div class="skel" aria-hidden="true"><i></i><i></i><i></i></div></div></div>
+  </section>
+
+  <section class="panel emp-sessions" aria-labelledby="emp-s-h">
+    <div class="panel-head"><h2 id="emp-s-h">جلساتك</h2></div>
+    <ol class="emp-timeline" id="emp-sessions"><li><div class="skel" aria-hidden="true"><i></i><i></i></div></li></ol>
+  </section>
+</div>
+{% endblock %}
+
+{% block scripts %}<script src="/static/js/pages/employee.js"></script>{% endblock %}

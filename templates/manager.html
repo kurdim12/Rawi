@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/manager.css">{% endblock %}
+{% block content %}
+<div class="page mgr">
+  <header class="page-head">
+    <span class="eyebrow">مكتب المدير المباشر · المشتريات</span>
+    <h1 class="page-title" id="mgr-greet">صباح الخير يا م. سامر</h1>
+    <p class="lede" id="mgr-lede">عم نجهّزلك اللي بستنّاك اليوم…</p>
+  </header>
+
+  <div class="mgr-layout">
+    <section class="stack mgr-main" aria-labelledby="mgr-queue-h">
+      <div class="section-head">
+        <h2 id="mgr-queue-h">بطاقات بانتظار مراجعتك</h2>
+        <span class="badge-count" id="mgr-count" aria-live="polite">…</span>
+        <span class="spacer"></span>
+        <div class="seg" role="group" aria-label="نطاق المراجعة" id="mgr-scope">
+          <button type="button" data-scope="team" aria-pressed="true">فريقي</button>
+          <button type="button" data-scope="all" aria-pressed="false">كل الشركة</button>
+        </div>
+      </div>
+      <div class="cluster mgr-bulk" id="mgr-bulk" hidden>
+        <button type="button" class="btn sm approve" id="mgr-approve-omar">اعتمد كل بطاقات عمر</button>
+        <span class="small muted" id="mgr-bulk-note"></span>
+      </div>
+      <div class="kgrid" id="mgr-queue" aria-live="polite"></div>
+    </section>
+
+    <aside class="stack mgr-side" aria-label="التسليم والجلسات">
+      <section class="panel stack" aria-labelledby="mgr-pair-h">
+        <div class="panel-head"><h3 id="mgr-pair-h">التسليم</h3><span class="spacer"></span><span id="mgr-pair-risk"></span></div>
+        <div id="mgr-pair"></div>
+      </section>
+
+      <section class="panel stack" aria-labelledby="mgr-q-h">
+        <div class="panel-head"><h3 id="mgr-q-h">أسئلة رنا المفتوحة</h3></div>
+        <ul class="list-rows mgr-qs" id="mgr-questions"></ul>
+      </section>
+
+      <section class="panel stack" aria-labelledby="mgr-s-h">
+        <div class="panel-head"><h3 id="mgr-s-h">الجلسات الجاية</h3><span class="spacer"></span><a class="small" href="/meetings">كل الجلسات</a></div>
+        <ul class="list-rows" id="mgr-sessions"></ul>
+      </section>
+    </aside>
+  </div>
+
+  <div class="mgr-undo" id="mgr-undo" role="status" aria-live="polite" hidden>
+    <span id="mgr-undo-msg"></span>
+    <button type="button" class="btn sm ghost" id="mgr-undo-btn">تراجع</button>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/manager.js"></script>{% endblock %}

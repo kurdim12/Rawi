@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/knowledge.css">{% endblock %}
+{% block content %}
+<div class="kb">
+  <header class="page-head">
+    <span class="eyebrow">ذاكرة الشركة</span>
+    <h1 class="page-title">قاعدة المعرفة</h1>
+    <p class="lede">كل اللي حكوه الناس بالجلسات، بطاقات مربوطة بصوت أصحابها. دوّر، اسمع، أو اسأل راوي مباشرة.</p>
+  </header>
+
+  <div class="stats kb-stats" id="kb-stats" aria-live="polite"></div>
+
+  <section class="panel kb-search-panel" aria-labelledby="kb-search-title">
+    <h2 class="sr" id="kb-search-title">دوّر واسأل</h2>
+    <form class="kb-ask" id="kb-ask-form" autocomplete="off">
+      <div class="search lg has-action kb-search">
+        <span class="kb-search-icon" data-kb-icon="search" aria-hidden="true"></span>
+        <input type="search" id="kb-q" name="q" placeholder="دوّر بالبطاقات أو اسأل: مين بيعطينا خصم على الكوابل؟" aria-label="دوّر أو اسأل راوي">
+        <button class="btn icon ghost search-action" type="button" id="kb-mic" aria-label="احكي سؤالك بالصوت"><span data-kb-icon="mic" aria-hidden="true"></span></button>
+      </div>
+      <button class="btn primary kb-ask-btn" type="submit" id="kb-ask-btn">اسأل راوي</button>
+    </form>
+    <div class="kb-answer" id="kb-answer" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="kb-filters" aria-label="فلترة البطاقات">
+    <label class="field kb-field">الشخص
+      <select id="kb-person"><option value="">الكل</option></select>
+    </label>
+    <label class="field kb-field">القسم
+      <select id="kb-dept"><option value="">كل الأقسام</option></select>
+    </label>
+    <div class="kb-field kb-status-wrap">
+      <span class="kb-flabel" id="kb-status-label">الحالة</span>
+      <div class="seg" id="kb-status" role="group" aria-labelledby="kb-status-label">
+        <button type="button" data-status="approved" aria-pressed="true">معتمدة</button>
+        <button type="button" data-status="pending" aria-pressed="false">بانتظار المراجعة</button>
+        <button type="button" data-status="all" aria-pressed="false">الكل</button>
+      </div>
+    </div>
+    <label class="check kb-crit"><input type="checkbox" id="kb-critical"> بس الحرجة</label>
+  </section>
+
+  <div class="kb-results-head">
+    <h2 class="kb-h2">البطاقات</h2>
+    <span class="chip muted no-dot" id="kb-count">—</span>
+  </div>
+  <div class="kgrid" id="kb-grid" aria-live="polite"></div>
+
+  <section class="panel kb-gaps" aria-labelledby="kb-gaps-title">
+    <div class="panel-head">
+      <h2 id="kb-gaps-title">الفجوات</h2>
+      <span class="spacer"></span>
+      <span class="chip muted no-dot" id="kb-gaps-count">—</span>
+    </div>
+    <p class="muted small">أسئلة انسألت وما إلها جواب لسا. راوي رح يسألها بالجلسة الجاية.</p>
+    <div class="kb-gaps-body" id="kb-gaps"></div>
+  </section>
+</div>
+
+<dialog class="sheet kb-dialog" id="kb-detail" aria-labelledby="kb-detail-title">
+  <div class="dialog-head">
+    <div class="stack tight">
+      <span class="eyebrow">بطاقة معرفة</span>
+      <h2 id="kb-detail-title">—</h2>
+    </div>
+    <button class="btn icon sm ghost" type="button" data-close aria-label="سكّر"><span data-kb-icon="x" aria-hidden="true"></span></button>
+  </div>
+  <div class="dialog-body" id="kb-detail-body"></div>
+</dialog>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/knowledge.js"></script>{% endblock %}

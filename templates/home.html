@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="/static/css/pages/home.css">{% endblock %}
+{% block content %}
+<div class="home">
+
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero-text">
+      <p class="eyebrow">ذاكرة الشركة بصوت أصحابها</p>
+      <h1 class="home-title" id="home-title">
+        <svg class="home-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="3" y="19" width="6" height="10" rx="3" fill="currentColor"/><rect x="13" y="11" width="6" height="18" rx="3" fill="currentColor"/><rect x="23" y="3" width="6" height="26" rx="3" fill="currentColor"/></svg>
+        <span>راوي</span>
+      </h1>
+      <p class="home-tagline">لما حدا يطلع من الشركة، خبرته ما بتطلع معه.</p>
+      <p class="lede home-promise">راوي بيقعد مع الموظف المغادر جلسات قصيرة بالصوت، بيحوّل كلامه لبطاقات معرفة مربوطة بصوته، والموظف الجديد بيسأل وبيسمع الجواب من صاحبه.</p>
+      <div class="home-ctas">
+        <a class="btn primary lg" href="/live" data-icon="live">شوف العرض الحي</a>
+        <a class="btn lg" href="/ceo" data-icon="chart">ادخل كمدير تنفيذي</a>
+      </div>
+    </div>
+    <div class="home-hero-art" aria-hidden="true">
+      <div class="home-bubble">
+        <span class="home-bubble-label">راوي</span>
+        <p>عمر، لما يتأخر المورّد بالحديد، شو أول اشي بتعمله؟</p>
+      </div>
+      <div class="home-bubble person">
+        <p>بتصل بأبو خالد مباشرة، مش بالمكتب. هو اللي بيحرّك الشحنة.</p>
+        <span class="home-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="home-bubble card">
+        <span class="home-bubble-tag">بطاقة معرفة · معتمدة</span>
+        <p>تأخير توريد الحديد: التواصل مع أبو خالد مباشرة</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-proof-title">
+    <div class="home-section-head">
+      <h2 id="home-proof-title">هلق، بشركة النخيل للمقاولات</h2>
+      <span class="chip ok home-live-chip">أرقام حيّة</span>
+    </div>
+    <div class="stats home-proof" id="home-proof" aria-live="polite"></div>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-how-title">
+    <div class="home-section-head">
+      <h2 id="home-how-title">كيف بيشتغل</h2>
+    </div>
+    <ol class="home-steps" role="list">
+      <li class="panel home-step">
+        <span class="home-step-num" data-step="1"></span>
+        <span class="home-step-ico" data-icon="mic"></span>
+        <h3>جلسة بصوت</h3>
+        <p>راوي بيسأل الموظف المغادر بالعربي، وهو بيحكي على راحته. بدون نماذج ولا تقارير طويلة.</p>
+      </li>
+      <li class="panel home-step">
+        <span class="home-step-num" data-step="2"></span>
+        <span class="home-step-ico" data-icon="book"></span>
+        <h3>بطاقات معرفة مربوطة بالصوت</h3>
+        <p>كل جواب بيصير بطاقة واضحة، مربوطة بالمقطع الأصلي، والمدير بيراجعها ويعتمدها.</p>
+      </li>
+      <li class="panel home-step">
+        <span class="home-step-num" data-step="3"></span>
+        <span class="home-step-ico" data-icon="play"></span>
+        <h3>الجديد بيسأل وبيسمع</h3>
+        <p>الموظف الجديد بيسأل راوي، وبيسمع الجواب بصوت صاحبه. واللي ما إله جواب بيصير سؤال للجلسة الجاية.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="home-section" aria-labelledby="home-roles-title">
+    <div class="home-section-head">
+      <h2 id="home-roles-title">لكل واحد بالشركة صفحته</h2>
+    </div>
+    <div class="home-roles" id="home-roles"></div>
+  </section>
+
+  <footer class="home-foot">
+    <p class="home-foot-line">توظيف · مهام · تسليم</p>
+    <p class="home-foot-sub">مقابِل عربي واحد بيحفظ خبرة شركتك بكلام أصحابها</p>
+  </footer>
+
+</div>
+{% endblock %}
+{% block scripts %}<script src="/static/js/pages/home.js"></script>{% endblock %}
