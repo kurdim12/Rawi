@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>راوي — ذاكرة الشركة بصوت أصحابها</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect x=%273%27 y=%2719%27 width=%276%27 height=%2710%27 rx=%273%27 fill=%27%23B5452F%27/%3E%3Crect x=%2713%27 y=%2711%27 width=%276%27 height=%2718%27 rx=%273%27 fill=%27%23B5452F%27/%3E%3Crect x=%2723%27 y=%273%27 width=%276%27 height=%2726%27 rx=%273%27 fill=%27%23B5452F%27/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F6F1E8;--panel:#FFFDF9;--line:#D9D0C2;--ink:#1B1A17;--ink2:#5B564D;
+  --accent:#B5452F;--accent-soft:#F4E2DC;--ok:#5F7F5A;--ok-soft:#E7EEE4;--hl:#F3E8D2;
+  --r:14px;--shadow:0 1px 2px rgba(27,26,23,.05),0 8px 24px rgba(27,26,23,.06);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.8 "IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+p,li{max-width:64ch}
+p{margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.muted{color:var(--ink2)}
+.small{font-size:14px}
+
+/* header */
+.top{max-width:1240px;margin:0 auto;padding:22px 16px 18px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mark{flex:none}
+.brand h1{margin:0;font-size:28px;font-weight:600;line-height:1.2}
+.brand .tag{color:var(--ink2);font-size:16px}
+.co{margin-inline-start:auto;font-size:14px;color:var(--ink2);border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--panel)}
+
+main{max-width:1240px;margin:0 auto;padding:0 16px 40px;display:grid;gap:20px}
+.duo{display:grid;gap:20px;min-width:0}
+@media (min-width:1024px){.duo{grid-template-columns:7fr 5fr;align-items:start}}
+
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;min-width:0}
+.phead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+.phead h2{margin:0;font-size:20px;font-weight:600}
+.pnum{width:32px;height:32px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-weight:600;color:var(--ink2);font-size:16px;flex:none;background:#fff}
+.spacer{flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;border:1px solid var(--line);border-radius:999px;padding:2px 10px;background:#fff;color:var(--ink2);line-height:1.7}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+
+.btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line);background:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:500;white-space:nowrap}
+.btn:hover{border-color:#B9AD9B}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#9E3B28}
+.btn.voice{color:var(--accent);border-color:#E3C2B9;background:#fff}
+.btn.voice:hover{background:var(--accent-soft)}
+.btn.sm{min-height:36px;padding:0 12px;font-size:15px}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* panel 0 */
+.row{display:flex;gap:16px;flex-wrap:wrap;margin-top:12px}
+.field{display:flex;flex-direction:column;gap:4px;font-size:15px;color:var(--ink2);font-weight:500}
+.field select,.field input{min-height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:0 12px;color:var(--ink);font-size:17px}
+.field select{min-width:260px;max-width:100%}
+.field input{width:120px}
+
+/* panel 1 */
+.log{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow:auto;padding:8px 2px;margin-top:10px;scroll-behavior:smooth}
+.bubble{max-width:min(64ch,92%);padding:10px 14px;border-radius:12px;background:#fff;border:1px solid var(--line)}
+.bubble.rawi{align-self:flex-start;border-right:3px solid var(--accent)}
+.bubble.omar{align-self:flex-end;background:#FBF8F2}
+.who{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;line-height:1.6;margin-bottom:2px}
+.rawi .who{color:var(--accent)}
+.omar .who{color:var(--ink2)}
+.who .play{border:0;background:none;color:var(--accent);cursor:pointer;font-size:13px;font-weight:500;padding:0 4px;min-height:24px;display:inline-flex;align-items:center;gap:4px}
+.who .play svg{width:14px;height:14px}
+.typing-dots{display:inline-flex;gap:4px;padding:6px 0}
+.typing-dots i{width:7px;height:7px;border-radius:50%;background:var(--ink2);opacity:.4;animation:blink 1.2s infinite}
+.typing-dots i:nth-child(2){animation-delay:.2s}.typing-dots i:nth-child(3){animation-delay:.4s}
+@keyframes blink{50%{opacity:1}}
+.lock{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;background:#EFE9DF;border:1px solid var(--line);border-radius:999px;padding:0 8px;line-height:1.7;vertical-align:1px;color:var(--ink)}
+.lock svg{width:12px;height:12px}
+
+.live{min-height:0;border:1px dashed #E3C2B9;background:#FDF7F4;border-radius:10px;padding:8px 12px;color:var(--ink2);margin-top:10px}
+.live b{color:var(--accent);font-weight:600;font-size:13px;display:block}
+
+.ptt-wrap{display:flex;align-items:center;gap:20px;padding:22px 4px 14px}
+.ptt{position:relative;width:96px;height:96px;border-radius:50%;border:0;background:var(--accent);color:#fff;cursor:pointer;flex:none;display:grid;place-items:center;
+  touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;box-shadow:0 8px 22px rgba(181,69,47,.32);transition:transform .15s}
+.ptt svg{width:36px;height:36px;position:relative;z-index:1}
+.ptt[disabled]{opacity:.55;cursor:wait}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);opacity:0;pointer-events:none}
+.rec .ptt{transform:scale(1.05)}
+.rec .ring{animation:ring 1.6s ease-out infinite}
+.rec .ring.r2{animation-delay:.8s}
+@keyframes ring{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.75);opacity:0}}
+.ptt-label{display:flex;flex-direction:column;gap:2px}
+.ptt-label b{font-size:18px;font-weight:600}
+.bars{display:none;align-items:flex-end;gap:4px;height:24px}
+.rec .bars{display:inline-flex}
+.bars i{width:5px;height:6px;border-radius:3px;background:var(--accent);animation:bar .9s ease-in-out infinite}
+.bars i:nth-child(2){animation-delay:.12s}.bars i:nth-child(3){animation-delay:.24s}.bars i:nth-child(4){animation-delay:.36s}.bars i:nth-child(5){animation-delay:.48s}
+@keyframes bar{0%,100%{height:5px}50%{height:24px}}
+
+.fb{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:16px 0 8px}
+.fb .btn{white-space:normal;text-align:right;justify-content:flex-start;padding:8px 14px;line-height:1.5}
+.fb .btn small{display:block;color:var(--ink2);font-weight:400;font-size:13px}
+.fb-note{font-size:14px;color:var(--ink2)}
+
+.typed{display:flex;gap:10px;align-items:flex-end}
+.typed textarea{flex:1;min-height:52px;max-height:160px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;line-height:1.6;min-width:0}
+.pfoot{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:16px;padding-top:14px}
+.counter{font-weight:500;color:var(--ink2);font-variant-numeric:tabular-nums}
+
+/* panel 2 */
+.cards{display:grid;gap:12px;margin-top:12px}
+.kcard{border:1px solid var(--line);border-radius:12px;background:#fff;padding:14px;transition:border-color .2s,background .2s}
+.kcard.approved{border-color:var(--ok);background:#FAFCF9}
+.khead{display:flex;align-items:center;gap:8px;justify-content:space-between}
+.ichip{font-size:13px;font-weight:600;color:var(--ink2);background:#F1ECE3;border-radius:999px;padding:0 10px;line-height:1.9}
+.conf{display:inline-flex;gap:4px;align-items:center}
+.conf i{width:8px;height:8px;border-radius:50%;border:1px solid var(--ink2);display:block}
+.conf i.on{background:var(--ink2)}
+.kcard h3{font-size:17px;font-weight:600;margin:6px 0 2px;line-height:1.6}
+.kcard p{font-size:16px}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tags span{font-size:13px;color:var(--ink2);border:1px solid var(--line);border-radius:999px;padding:0 9px;line-height:1.8}
+.kact{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.approve[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:#fff}
+.empty{border:1px dashed var(--line);border-radius:12px;padding:18px;color:var(--ink2);text-align:center}
+.empty p{margin:0 auto}
+.old{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
+.old h3{font-size:15px;font-weight:600;color:var(--ink2);margin:0}
+.old .kcard{background:#F8F5EF;border-style:dashed;color:var(--ink2)}
+.old .kcard h3{color:var(--ink2)}
+.skel{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}
+.skel i{display:block;height:12px;border-radius:6px;margin:8px 0;background:linear-gradient(90deg,#EFE9DF 25%,#F8F4EC 50%,#EFE9DF 75%);background-size:200% 100%;animation:shim 1.2s linear infinite}
+.skel i:nth-child(1){width:35%}.skel i:nth-child(2){width:90%}.skel i:nth-child(3){width:70%}
+@keyframes shim{to{background-position:-200% 0}}
+.kcard.pulse{animation:pulse .8s ease-in-out 2}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(181,69,47,0)}50%{box-shadow:0 0 0 6px rgba(181,69,47,.28);border-color:var(--accent)}}
+
+/* panel 3 */
+.ask{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.ask input{flex:1 1 240px;min-height:48px;border:1px solid var(--line);border-radius:10px;padding:0 14px;background:#fff;min-width:0}
+.ask .btn.icon{width:48px;padding:0}
+.ask .btn.icon.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.sugg{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sugg button{min-height:36px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:0 12px;font-size:14px;cursor:pointer;color:var(--ink2)}
+.sugg button:hover{color:var(--ink);border-color:#B9AD9B}
+.answer{margin-top:14px}
+.acard{border:1px solid var(--line);border-right:3px solid var(--accent);border-radius:12px;background:#fff;padding:14px 16px}
+.acard .who{color:var(--accent)}
+.asrc{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;font-size:14px;color:var(--ink2)}
+.asrc a{color:var(--ink);font-weight:500}
+.unknown{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;background:#FBF8F2}
+.unknown b{font-weight:600;display:block}
+.nextq{margin-top:18px}
+.nextq h3{font-size:15px;font-weight:600;color:var(--ink2);margin:0 0 4px}
+.nextq ol{margin:0;padding-inline-start:22px}
+
+/* panel 4 */
+.cols{display:grid;gap:16px;margin-top:12px}
+@media (min-width:768px){.cols{grid-template-columns:1fr 1fr}}
+.desc{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff}
+.desc h3{margin:0 0 6px;font-size:16px;font-weight:600}
+.desc ul{margin:0;padding-inline-start:20px}
+.desc li{margin:4px 0}
+.desc li.miss{background:var(--hl);border-radius:8px;padding:2px 8px;margin-inline-start:-8px;list-style-position:inside}
+.desc .flag{font-size:12px;font-weight:600;border:1px solid #CDBB98;border-radius:999px;padding:0 8px;margin-inline-start:6px;white-space:nowrap;color:#6B5A36}
+.out{display:grid;gap:12px;margin-top:16px}
+@media (min-width:768px){.out{grid-template-columns:1fr 1fr}}
+.out .box{border:1px solid var(--line);border-radius:12px;padding:12px 16px;background:#FBF8F2}
+.out .box b{display:block;font-size:14px;color:var(--ink2);font-weight:600}
+
+footer{max-width:1240px;margin:0 auto;padding:10px 16px 40px;text-align:center;color:var(--ink2)}
+footer .flow{font-weight:600;color:var(--ink);letter-spacing:.5px}
+footer p{margin:0 auto}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:12px;font-size:15px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;display:flex;align-items:center;gap:8px;max-width:calc(100% - 32px);z-index:10}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast svg{width:16px;height:16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:600px){
+  .panel{padding:16px}
+  .field select{min-width:0;width:100%}
+  .field{flex:1 1 100%}
+  .ptt-wrap{gap:16px}
+  .typed{flex-direction:column;align-items:stretch}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .rec .ring{opacity:.35;transform:scale(1.25)}
+  .bars i:nth-child(odd){height:18px}.bars i:nth-child(even){height:10px}
+  .kcard.pulse{outline:3px solid var(--accent);outline-offset:2px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <svg class="mark" width="36" height="36" viewBox="0 0 32 32" aria-hidden="true">
+    <rect x="3" y="19" width="6" height="10" rx="3" fill="#B5452F"/>
+    <rect x="13" y="11" width="6" height="18" rx="3" fill="#B5452F"/>
+    <rect x="23" y="3" width="6" height="26" rx="3" fill="#B5452F"/>
+  </svg>
+  <div class="brand">
+    <h1>راوي</h1>
+    <div class="tag">ذاكرة الشركة بصوت أصحابها</div>
+  </div>
+  <span class="co">شركة النخيل للمقاولات</span>
+</header>
+
+<main>
+  <!-- ٠ -->
+  <section class="panel" id="p0" aria-labelledby="h0">
+    <div class="phead">
+      <span class="pnum">٠</span><h2 id="h0">اختيار الحكم</h2>
+      <span class="chip"><span class="dot"></span>مُدخل حيّ</span>
+    </div>
+    <p class="muted">لجنة التحكيم بتختار المورد واليوم — وكل سؤال وجواب ووصف وظيفي تحت بيتبنّى عليهم.</p>
+    <div class="row">
+      <label class="field">المورد
+        <select id="supplier">
+          <option>سما للاتصالات</option>
+          <option>الرواد للمواد الكهربائية</option>
+          <option>مؤسسة الحديد الأردنية</option>
+        </select>
+      </label>
+      <label class="field">يوم من الشهر
+        <input id="day" type="number" min="1" max="28" value="12" inputmode="numeric">
+      </label>
+    </div>
+  </section>
+
+  <div class="duo">
+    <!-- ١ -->
+    <section class="panel" id="p1" aria-labelledby="h1">
+      <div class="phead">
+        <span class="pnum">١</span><h2 id="h1">جلسة التسليم مع عمر</h2>
+        <span class="spacer"></span>
+        <span class="chip">مشتريات · باقيله ٩ أيام</span>
+      </div>
+      <div id="log" class="log" aria-live="polite"></div>
+      <div id="live" class="live" hidden><b>عم بسمعك…</b><span id="liveText"></span></div>
+
+      <div id="pttWrap" class="ptt-wrap">
+        <button id="ptt" class="ptt" type="button" aria-label="اضغط واحكي — ضل ضاغط وانت بتحكي">
+          <span class="ring"></span><span class="ring r2"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+        </button>
+        <div class="ptt-label">
+          <b id="pttText">اضغط واحكي</b>
+          <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span id="pttHint" class="muted small">ضلّ ضاغط وانت بتحكي، أو امسك زر المسافة</span>
+        </div>
+      </div>
+
+      <div id="fbWrap" hidden>
+        <p class="fb-note">وضع العرض الاحتياطي: اختار جواب جاهز من أجوبة عمر.</p>
+        <div id="fb" class="fb"></div>
+      </div>
+
+      <div class="typed">
+        <label class="sr" for="typed">أو اكتب الجواب</label>
+        <textarea id="typed" rows="2" placeholder="أو اكتب الجواب"></textarea>
+        <button id="sendTyped" class="btn" type="button">إرسال</button>
+      </div>
+
+      <div class="pfoot">
+        <span id="counter" class="counter">الجواب ١ · <span dir="ltr">٠٠:٠٠</span></span>
+        <span class="spacer"></span>
+        <button id="endBtn" class="btn primary" type="button">إنهاء الجلسة</button>
+      </div>
+    </section>
+
+    <!-- ٢ -->
+    <section class="panel" id="p2" aria-labelledby="h2">
+      <div class="phead">
+        <span class="pnum">٢</span><h2 id="h2">معرفة عمر</h2>
+        <span class="spacer"></span>
+        <button id="approveAll" class="btn sm" type="button" hidden>اعتماد الكل</button>
+      </div>
+      <div id="cards" class="cards">
+        <div class="empty"><p>لما تنهي الجلسة، راوي بيحوّل أجوبة عمر لبطاقات معرفة — كل بطاقة مربوطة بصوته.</p></div>
+      </div>
+      <div class="old">
+        <h3>من جلسة سابقة</h3>
+        <div id="oldCards" class="cards"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ٣ -->
+  <section class="panel" id="p3" aria-labelledby="h3">
+    <div class="phead"><span class="pnum">٣</span><h2 id="h3">رنا تسأل راوي</h2></div>
+    <p class="muted">رنا بتسأل، وراوي بيجاوب من البطاقات المعتمدة بس — وبيسمّعها الجواب بصوت عمر.</p>
+    <form id="askForm" class="ask" autocomplete="off">
+      <label class="sr" for="askInput">سؤال رنا</label>
+      <input id="askInput" placeholder="اسألي راوي عن شغل عمر…">
+      <button id="askMic" class="btn icon" type="button" aria-label="احكي السؤال" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>
+      </button>
+      <button class="btn primary" type="submit">اسألي</button>
+    </form>
+    <div id="sugg" class="sugg"></div>
+    <div id="answer" class="answer" aria-live="polite"></div>
+    <div class="nextq">
+      <h3>أسئلة الجلسة الجاية</h3>
+      <ol id="nextList"></ol>
+      <p id="nextEmpty" class="muted small">لسا ما في — أي سؤال ما إله جواب بينضاف هون.</p>
+    </div>
+  </section>
+
+  <!-- ٤ -->
+  <section class="panel" id="p4" aria-labelledby="h4">
+    <div class="phead"><span class="pnum">٤</span><h2 id="h4">إغلاق الدورة</h2></div>
+    <p class="muted">اللي حكاه عمر بيرجع للتوظيف: وصف وظيفي أصدق، مؤشر أداء، وسؤال مقابلة للي بيشغل مكان رنا بعدين.</p>
+    <div class="cols">
+      <div class="desc"><h3>الوصف الرسمي</h3><ul id="official"></ul></div>
+      <div class="desc"><h3>الوصف الحقيقي</h3><ul id="real"></ul></div>
+    </div>
+    <div class="out">
+      <div class="box"><b>KPI مقترح</b><span id="kpi"></span></div>
+      <div class="box"><b>سؤال مقابلة لوظيفة رنا</b><span id="iq"></span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p class="flow">توظيف · مهام · تسليم</p>
+  <p>مقابِل عربي واحد بيحفظ خبرة شركتك بكلام أصحابها</p>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<audio id="player" preload="none"></audio>
+
+<script>
+(() => {
+'use strict';
+const $ = s => document.querySelector(s);
+const FALLBACK = new URLSearchParams(location.search).get('mode') === 'fallback';
+const REDUCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const MASK = '[حُذفت]';
+const OPENING = 'أهلاً عمر. خلّينا نبلّش: شو الإشي اللي لو موظف جديد عمله حسب النظام بالزبط رح يخرب؟';
+const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+const PLAY = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+
+const S = {answers: [], turns: [{role: 'rawi', text: OPENING}], cards: [], approved: new Set(),
+           busy: false, start: null, pendingAudio: null, fbAudio: {}};
+
+const OLD = [
+  {id: 'old1', title: 'توقيع الطلبات الكبيرة', tags: ['موافقات', 'سقف'],
+   fact: 'أي طلب شراء فوق ٥٠٠٠ دينار لازم يوقّعه م. سامر بإيده قبل ما يطلع أمر الشراء، حتى لو المورد معتمد. التوقيع الإلكتروني لحاله ما بيكفي.'},
+  {id: 'old2', title: 'الإسمنت بالصيف', tags: ['توريد', 'مواسم'],
+   fact: 'بشهر ٧ و٨ بنطلب الإسمنت قبل أسبوعين بدل أسبوع، لأنه المصانع بتوقف للصيانة والكميات بتقلّ.'},
+  {id: 'old3', title: 'قطع الغيار المستعجلة', tags: ['عروض أسعار', 'استثناء'],
+   fact: 'لازم ٣ عروض أسعار لأي مادة جديدة، بس قطع غيار المعدات المستعجلة للموقع بنكتفي بعرض واحد ومنوثّق السبب بإيميل لـ م. سامر.'},
+];
+
+const FB = [
+  {label: 'الخصم اللي مش مكتوب', t: (s, d) => `مع ${s} في اتفاق شفهي من سنتين: إذا دفعنا فاتورتهم قبل يوم ${d} من الشهر بيعطونا خصم ٣٪ كاش. مش مكتوب بالعقد، الاتفاق بيني وبين أبو خالد مدير المبيعات عندهم. اللي بيمشي حسب النظام بيستنى فترة السداد ٦٠ يوم وبيضيّع الخصم.`},
+  {label: 'بيانات دخول البوابة', t: (s, d) => `بيانات الدخول على بوابة ${s} للطلبيات: اسم المستخدم nakheel.proc وكلمة السر هي Nakheel2026. النسخة الورقية محفوظة بخزنة م. سامر، وهو اللي بيعطي الصلاحية لأي حدا جديد.`},
+  {label: 'مين بيغطّي الدفعات', t: (s, d) => `لما أكون غايب، الدفعات المستعجلة بتغطّيها لينا من المالية. بس صلاحيتها لحد ٢٠٠٠ دينار، وأي إشي أكبر لازم م. سامر يوقّعه. إذا قرّب يوم ${d} وفاتورة ${s} لسا ما انْدفعت، لينا بتعرف تتصرف.`},
+  {label: 'لو مشيت حسب النظام', t: (s, d) => `النظام بيقول الاستلام بساعات الدوام بس. بس شاحنات الحديد ممنوعة تفوت المدينة بالنهار، فأنا بنسّق مع أبو محمود حارس الموقع يستلم الساعة ٦ الصبح، وأنا بوقّع إشعار الاستلام تاني يوم. لو استنينا الدوام، الشحنة بترجع.`},
+];
+
+/* ---------- helpers ---------- */
+const AR = '٠١٢٣٤٥٦٧٨٩';
+const ar = n => String(n).replace(/\d/g, d => AR[d]);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+const rich = s => esc(s).split(MASK).join(`<span class="lock">${LOCK}حُذفت</span>`);
+function ctx() {
+  let day = parseInt($('#day').value, 10);
+  if (!Number.isFinite(day)) day = 12;
+  return {supplier: $('#supplier').value, day: Math.max(1, Math.min(28, day))};
+}
+let toastT;
+function toast(msg, lock) {
+  const t = $('#toast');
+  t.innerHTML = (lock ? LOCK : '') + esc(msg);
+  t.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => t.classList.remove('show'), 2800);
+}
+function maskSecrets(text) {
+  let found = false;
+  let t = String(text).replace(/(كلمة السر|كلمة سر|الباسورد|باسورد|password)(\s*(?:هي|هو|:)?\s*)([^\s،,.]+)/gi,
+    (m, a, b, c) => { if (c === MASK) return m; found = true; return a + b + MASK; });
+  t = t.replace(/[A-Za-z0-9]{6,}/g, w => (/[A-Za-z]/.test(w) && /\d/.test(w)) ? (found = true, MASK) : w);
+  return {text: t, found};
+}
+async function api(path, body) {
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 20000);
+  try {
+    const r = await fetch(path, {method: 'POST', headers: {'Content-Type': 'application/json'},
+                                 body: JSON.stringify(body), signal: ctl.signal});
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (_) { return null; } finally { clearTimeout(timer); }
+}
+function typeInto(el, text, scroller) {
+  return new Promise(res => {
+    if (REDUCE) { el.innerHTML = rich(text); if (scroller) scroller.scrollTop = scroller.scrollHeight; return res(); }
+    let i = 0;
+    const step = () => {
+      i = Math.min(text.length, i + 2);
+      el.textContent = text.slice(0, i);
+      if (scroller) scroller.scrollTop = scroller.scrollHeight;
+      if (i < text.length) setTimeout(step, 22); else { el.innerHTML = rich(text); res(); }
+    };
+    step();
+  });
+}
+
+/* ---------- voice out ---------- */
+let arVoice = null;
+function pickVoice() {
+  const v = speechSynthesis.getVoices();
+  arVoice = v.find(x => /^ar[-_]JO/i.test(x.lang)) || v.find(x => /^ar/i.test(x.lang)) || null;
+}
+if ('speechSynthesis' in window) { pickVoice(); speechSynthesis.addEventListener('voiceschanged', pickVoice); }
+function speak(text) {
+  if (!arVoice) return;
+  try {
+    speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = arVoice; u.lang = arVoice.lang;
+    speechSynthesis.speak(u);
+  } catch (_) {}
+}
+const player = $('#player');
+function playAudio(url) {
+  if (!url) return;
+  try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (_) {}
+  player.src = url;
+  player.play().catch(() => {});
+}
+
+/* ---------- panel 1: chat ---------- */
+const log = $('#log');
+function bubble(role, html) {
+  const b = document.createElement('div');
+  b.className = 'bubble ' + role;
+  b.innerHTML = html;
+  log.appendChild(b);
+  log.scrollTop = log.scrollHeight;
+  return b;
+}
+function addRawi(text, instant) {
+  const b = bubble('rawi', '<div class="who">راوي</div><p></p>');
+  const p = b.querySelector('p');
+  if (instant) { p.innerHTML = rich(text); return Promise.resolve(); }
+  return typeInto(p, text, log);
+}
+function addRawiThinking() {
+  return bubble('rawi', '<div class="who">راوي</div><p><span class="typing-dots" aria-label="راوي عم يفكّر"><i></i><i></i><i></i></span></p>');
+}
+function addOmar(text, url, index) {
+  const play = url ? `<button class="play" type="button" data-url="${esc(url)}">${PLAY}اسمع</button>` : '';
+  bubble('omar', `<div class="who">عمر · الجواب ${ar(index + 1)} ${play}</div><p>${rich(text)}</p>`);
+}
+log.addEventListener('click', e => { const b = e.target.closest('.play'); if (b) playAudio(b.dataset.url); });
+
+function setBusy(on) {
+  S.busy = on;
+  $('#ptt').disabled = on;
+  $('#sendTyped').disabled = on;
+  document.querySelectorAll('#fb .btn').forEach(b => b.disabled = on);
+}
+function updateCounter() {
+  const secs = S.start ? Math.floor((Date.now() - S.start) / 1000) : 0;
+  const mm = String(Math.floor(secs / 60)).padStart(2, '0'), ss = String(secs % 60).padStart(2, '0');
+  $('#counter').innerHTML = `الجواب ${ar(S.answers.length + 1)} · <span dir="ltr">${ar(mm)}:${ar(ss)}</span>`;
+}
+setInterval(updateCounter, 1000);
+
+const LOCAL_Q = [
+  'مين بتتصل فيه لما المورد يتأخر، وشو الخطة البديلة اللي مش مكتوبة؟',
+  'شو الاستثناء اللي بتعمله وما حدا بيعرف عنه غيرك؟',
+  'لما تكون غايب، مين بيغطّي الدفعات؟',
+];
+
+async function submitAnswer(raw, url) {
+  raw = String(raw || '').trim();
+  if (!raw || S.busy) return false;
+  const {text, found} = maskSecrets(raw);
+  if (found) toast('تم حذف كلمة سر قبل الإرسال', true);
+  if (!S.start) S.start = Date.now();
+  const index = S.answers.length;
+  S.answers.push({index, transcript: text, url: url || null});
+  S.turns.push({role: 'omar', text});
+  addOmar(text, url, index);
+  updateCounter();
+  setBusy(true);
+  const thinking = addRawiThinking();
+  const r = await api('/api/followup', {...ctx(), index, turns: S.turns});
+  const q = (r && typeof r.question === 'string' && r.question.trim()) || LOCAL_Q[index % LOCAL_Q.length];
+  S.turns.push({role: 'rawi', text: q});
+  await typeInto(thinking.querySelector('p'), q, log);
+  speak(q);
+  setBusy(false);
+  return true;
+}
+
+/* ---------- push to talk ---------- */
+const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+const MIME = window.MediaRecorder && MediaRecorder.isTypeSupported
+  ? (MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : MediaRecorder.isTypeSupported('audio/mp4') ? 'audio/mp4' : '')
+  : '';
+let rec = null, mr = null, stream = null, chunks = [], holding = false, recording = false;
+let finalText = '', interimText = '', recStart = 0, recTimer = null, stopping = false;
+
+function setRecUI(on) {
+  $('#pttWrap').classList.toggle('rec', on);
+  $('#pttText').textContent = on ? 'عم بسمعك… ' : 'اضغط واحكي';
+  $('#live').hidden = !on;
+  if (on) {
+    $('#liveText').textContent = '';
+    recStart = Date.now();
+    recTimer = setInterval(() => {
+      const s = Math.floor((Date.now() - recStart) / 1000);
+      $('#pttText').textContent = `عم بسمعك… ${ar(Math.floor(s / 60))}:${ar(String(s % 60).padStart(2, '0'))}`;
+    }, 500);
+  } else clearInterval(recTimer);
+}
+function showLive() { $('#liveText').textContent = (finalText + ' ' + interimText).trim(); }
+
+async function startRec() {
+  if (recording || S.busy || FALLBACK) return;
+  holding = true; recording = true;
+  finalText = ''; interimText = ''; chunks = [];
+  try { if ('speechSynthesis' in window) speechSynthesis.cancel(); } catch (_) {}
+  player.pause();
+  setRecUI(true);
+  if (SR) {
+    try {
+      rec = new SR();
+      rec.lang = 'ar-JO'; rec.continuous = true; rec.interimResults = true;
+      rec.onresult = e => {
+        let interim = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          const res = e.results[i];
+          if (res.isFinal) finalText += res[0].transcript + ' '; else interim += res[0].transcript;
+        }
+        interimText = interim;
+        showLive();
+      };
+      rec.onerror = () => {};
+      rec.onend = () => { if (holding && rec) { try { rec.start(); } catch (_) {} } };
+      rec.start();
+    } catch (_) { rec = null; }
+  }
+  if (window.MediaRecorder && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    try {
+      if (!stream) stream = await navigator.mediaDevices.getUserMedia({audio: true});
+      if (!holding) return;
+      mr = new MediaRecorder(stream, MIME ? {mimeType: MIME} : undefined);
+      mr.ondataavailable = e => { if (e.data && e.data.size) chunks.push(e.data); };
+      mr.start();
+    } catch (_) { mr = null; }
+  }
+}
+
+async function stopRec() {
+  if (!recording || stopping) return;
+  stopping = true; holding = false;
+  const m = mr;
+  const blobP = new Promise(res => {
+    if (m && m.state !== 'inactive') {
+      m.onstop = () => res(chunks.length ? new Blob(chunks, {type: m.mimeType || MIME || 'audio/webm'}) : null);
+      try { m.stop(); } catch (_) { res(null); }
+    } else res(null);
+  });
+  const r = rec; rec = null;
+  try { r && r.stop(); } catch (_) {}
+  await sleep(600); // وقت للنتائج النهائية من التعرّف على الكلام
+  const blob = await Promise.race([blobP, sleep(1500).then(() => null)]);
+  recording = false; stopping = false; mr = null;
+  setRecUI(false);
+  const text = (finalText + ' ' + interimText).replace(/\s+/g, ' ').trim();
+  const url = blob && blob.size ? URL.createObjectURL(blob) : null;
+  if (text) {
+    submitAnswer(text, url);
+  } else if (url) {
+    S.pendingAudio = url;
+    toast(SR ? 'ما التقطت كلام — اكتب الجواب وبنربطه بالتسجيل' : 'المتصفح ما بيحوّل الصوت لنص — اكتب الجواب وبنربطه بالتسجيل');
+    $('#typed').focus();
+  } else {
+    toast('ما وصلني صوت — ضلّ ضاغط وانت بتحكي، أو اكتب الجواب');
+  }
+}
+
+const ptt = $('#ptt');
+ptt.addEventListener('pointerdown', e => {
+  if (e.button !== undefined && e.button !== 0) return;
+  e.preventDefault();
+  try { ptt.setPointerCapture(e.pointerId); } catch (_) {}
+  startRec();
+});
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(ev => ptt.addEventListener(ev, () => stopRec()));
+ptt.addEventListener('contextmenu', e => e.preventDefault());
+const typingTarget = el => el && (el.closest('input, textarea, select') || el.isContentEditable);
+document.addEventListener('keydown', e => {
+  if (e.code !== 'Space' || FALLBACK || typingTarget(e.target)) return;
+  e.preventDefault();
+  if (!e.repeat) startRec();
+});
+document.addEventListener('keyup', e => {
+  if (e.code !== 'Space' || typingTarget(e.target)) return;
+  if (recording) { e.preventDefault(); stopRec(); }
+});
+window.addEventListener('blur', () => { if (recording) stopRec(); });
+
+async function sendTyped() {
+  const ta = $('#typed');
+  if (!ta.value.trim() || S.busy) return;
+  const ok = await submitAnswer(ta.value, S.pendingAudio);
+  if (ok !== false) { ta.value = ''; S.pendingAudio = null; }
+}
+$('#sendTyped').addEventListener('click', sendTyped);
+$('#typed').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); sendTyped(); }
+});
+
+/* ---------- fallback mode ---------- */
+if (FALLBACK) {
+  $('#pttWrap').hidden = true;
+  $('#fbWrap').hidden = false;
+  const box = $('#fb');
+  FB.forEach((f, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn';
+    b.innerHTML = `${esc(f.label)}<small>جواب عمر ${ar(i + 1)}</small>`;
+    b.addEventListener('click', () => {
+      const {supplier, day} = ctx();
+      submitAnswer(f.t(supplier, ar(day)), S.fbAudio[i] || null);
+    });
+    box.appendChild(b);
+  });
+  [1, 2, 3, 4].forEach(n => {
+    const url = `/static/audio/omar-${n}.webm`;
+    fetch(url, {method: 'HEAD'}).then(r => { if (r.ok) S.fbAudio[n - 1] = url; }).catch(() => {});
+  });
+}
+
+/* ---------- panel 2: cards ---------- */
+function confDots(n) {
+  n = Math.max(1, Math.min(3, Number(n) || 2));
+  return `<span class="conf" title="درجة الثقة ${ar(n)} من ٣" aria-label="درجة الثقة ${ar(n)} من ٣">` +
+    [1, 2, 3].map(i => `<i class="${i <= n ? 'on' : ''}"></i>`).join('') + '</span>';
+}
+function cardHTML(c, old) {
+  const tags = (c.tags || []).map(t => `<span>${esc(t)}</span>`).join('');
+  const head = old
+    ? `<span class="ichip">قديمة · معتمدة</span>`
+    : `<span class="ichip">الجواب ${ar(Number(c.answer_index) + 1)}</span>${confDots(c.confidence)}`;
+  const acts = old ? '' : `<div class="kact">
+      ${c.url ? `<button class="btn voice sm listen" type="button">${PLAY}اسمع عمر</button>` : ''}
+      <button class="btn sm approve" type="button" aria-pressed="${S.approved.has(c.id)}">${S.approved.has(c.id) ? '✓ معتمدة' : 'اعتماد'}</button>
+    </div>`;
+  return `<article class="kcard${!old && S.approved.has(c.id) ? ' approved' : ''}" id="card-${esc(c.id)}" data-id="${esc(c.id)}">
+    <div class="khead">${head}</div>
+    <h3>${rich(c.title)}</h3><p>${rich(c.fact)}</p>
+    ${tags ? `<div class="tags">${tags}</div>` : ''}${acts}</article>`;
+}
+function renderCards() {
+  const box = $('#cards');
+  if (!S.cards.length) {
+    box.innerHTML = '<div class="empty"><p>ما طلع ولا بطاقة — جاوب كم سؤال كمان وانهي الجلسة.</p></div>';
+    $('#approveAll').hidden = true;
+    return;
+  }
+  box.innerHTML = S.cards.map(c => cardHTML(c, false)).join('');
+  $('#approveAll').hidden = false;
+  $('#approveAll').textContent = S.cards.every(c => S.approved.has(c.id)) ? '✓ كلها معتمدة' : 'اعتماد الكل';
+}
+$('#oldCards').innerHTML = OLD.map(c => cardHTML(c, true)).join('');
+$('#cards').addEventListener('click', e => {
+  const card = e.target.closest('.kcard');
+  if (!card) return;
+  const c = S.cards.find(x => x.id === card.dataset.id);
+  if (!c) return;
+  if (e.target.closest('.listen')) playAudio(c.url);
+  if (e.target.closest('.approve')) {
+    S.approved.has(c.id) ? S.approved.delete(c.id) : S.approved.add(c.id);
+    renderCards();
+  }
+});
+$('#approveAll').addEventListener('click', () => {
+  S.cards.forEach(c => S.approved.add(c.id));
+  renderCards();
+  toast('اعتمدت كل البطاقات — رنا بتقدر تسأل هلق');
+});
+
+function localCards() {
+  return S.answers.map(a => {
+    const w = a.transcript.split(/\s+/);
+    return {answer_index: a.index, title: w.slice(0, 6).join(' '), fact: a.transcript, tags: ['مشتريات'], confidence: 2};
+  });
+}
+async function endSession() {
+  if (!S.answers.length) { toast('لسا عمر ما جاوب ولا سؤال'); return; }
+  if (S.busy) return;
+  const btn = $('#endBtn');
+  btn.disabled = true;
+  $('#approveAll').hidden = true;
+  $('#cards').innerHTML = '<div class="skel"><i></i><i></i><i></i></div>'.repeat(Math.min(3, S.answers.length));
+  if (window.innerWidth < 1024) $('#p2').scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block: 'start'});
+  const r = await api('/api/extract', {...ctx(), answers: S.answers.map(a => ({index: a.index, transcript: a.transcript}))});
+  const raw = r && Array.isArray(r.cards) && r.cards.length ? r.cards : localCards();
+  S.cards = raw.map((c, i) => ({
+    id: 'c' + i, answer_index: c.answer_index, title: String(c.title || ''), fact: String(c.fact || ''),
+    tags: Array.isArray(c.tags) ? c.tags : [], confidence: c.confidence,
+    url: (S.answers.find(a => a.index === Number(c.answer_index)) || {}).url || null,
+  }));
+  S.approved = new Set();
+  renderCards();
+  btn.disabled = false;
+  addRawi(`يسلموا عمر. طلّعت ${ar(S.cards.length)} بطاقات من كلامك — راجعها م. سامر واعتمدها، وبتوصل لرنا بصوتك.`);
+}
+$('#endBtn').addEventListener('click', endSession);
+
+/* ---------- panel 3: Rana asks ---------- */
+function knowledge() {
+  return [...S.cards.filter(c => S.approved.has(c.id)), ...OLD];
+}
+function addNext(q) {
+  const li = document.createElement('li');
+  li.textContent = q;
+  $('#nextList').appendChild(li);
+  $('#nextEmpty').hidden = true;
+}
+function pulse(el) {
+  if (!el) return;
+  el.classList.remove('pulse'); void el.offsetWidth; el.classList.add('pulse');
+  el.scrollIntoView({behavior: REDUCE ? 'auto' : 'smooth', block: 'nearest'});
+  setTimeout(() => el.classList.remove('pulse'), 2200);
+}
+async function askRawi(q) {
+  q = String(q || '').trim();
+  if (!q) return;
+  const {text, found} = maskSecrets(q);
+  if (found) toast('تم حذف كلمة سر قبل الإرسال', true);
+  const ans = $('#answer');
+  ans.innerHTML = '<div class="acard"><div class="who">راوي</div><span class="typing-dots"><i></i><i></i><i></i></span></div>';
+  const kb = knowledge();
+  const r = await api('/api/ask', {question: text, cards: kb.map(c => ({id: c.id, title: c.title, fact: c.fact}))});
+  const src = r && r.card_id ? kb.find(c => c.id === String(r.card_id)) : null;
+  if (r && r.answer && src) {
+    const isOld = src.id.startsWith('old');
+    const label = isOld ? 'من جلسة سابقة' : `الجواب ${ar(Number(src.answer_index) + 1)}`;
+    ans.innerHTML = `<div class="acard"><div class="who">راوي</div><p></p>
+      <div class="asrc">المصدر: <a href="#card-${esc(src.id)}">${rich(src.title)}</a> · ${label}
+      ${src.url ? `<button class="btn voice sm" type="button" id="ansPlay">${PLAY}اسمع عمر</button>` : ''}</div></div>`;
+    const btn = $('#ansPlay');
+    if (btn) btn.addEventListener('click', () => playAudio(src.url));
+    pulse(document.getElementById('card-' + src.id));
+    if (src.url) playAudio(src.url);
+    await typeInto(ans.querySelector('p'), r.answer);
+  } else {
+    ans.innerHTML = '<div class="unknown"><b>عمر ما حكى عن هاد لسا</b><span class="muted">أُضيفت لأسئلة الجلسة الجاية</span></div>';
+    addNext(text);
+    if (S.cards.length && !S.cards.some(c => S.approved.has(c.id))) toast('في بطاقات من جلسة عمر لسا مش معتمدة');
+  }
+}
+$('#askForm').addEventListener('submit', e => { e.preventDefault(); const v = $('#askInput').value; $('#askInput').value = ''; askRawi(v); });
+$('#sugg').addEventListener('click', e => { const b = e.target.closest('button'); if (b) askRawi(b.textContent); });
+
+if (SR) {
+  const mic = $('#askMic');
+  mic.hidden = false;
+  let r2 = null;
+  mic.addEventListener('click', () => {
+    if (r2) { try { r2.stop(); } catch (_) {} return; }
+    try {
+      r2 = new SR(); r2.lang = 'ar-JO'; r2.interimResults = true;
+      mic.classList.add('on');
+      r2.onresult = e => { $('#askInput').value = Array.from(e.results).map(x => x[0].transcript).join(' '); };
+      r2.onend = () => { mic.classList.remove('on'); r2 = null; const v = $('#askInput').value.trim(); if (v) { $('#askInput').value = ''; askRawi(v); } };
+      r2.onerror = () => {};
+      r2.start();
+    } catch (_) { r2 = null; mic.classList.remove('on'); }
+  });
+}
+
+/* ---------- panel 4 + supplier/day ---------- */
+function renderStatic() {
+  const {supplier, day} = ctx();
+  const d = ar(day);
+  const official = [
+    'إعداد طلبات الشراء ومتابعتها حسب الإجراءات المعتمدة',
+    'التواصل مع الموردين والحصول على عروض الأسعار',
+    'إصدار أوامر الشراء ضمن الصلاحيات',
+    'متابعة التوريد والاستلام مع المواقع',
+    'أرشفة الفواتير وتسليمها للدائرة المالية',
+  ];
+  const real = [
+    {t: 'بيقارن عروض الأسعار على مدة التوريد وتاريخ المورد معنا، مش بس على السعر'},
+    {t: `بيدفع فاتورة ${supplier} قبل يوم ${d} من الشهر عشان ما يضيع خصم ٣٪ كاش متفق عليه شفهياً`, miss: true},
+    {t: 'بيرجع لـ م. سامر بأي طلب فوق السقف قبل ما يطلع أمر الشراء'},
+    {t: 'بيعرف مين بيغطّي الدفعات المستعجلة لما المسؤول يغيب، ولحد أي مبلغ', miss: true},
+    {t: 'بينسّق مع الموقع على مواعيد الاستلام الفعلية، مش المكتوبة بأمر الشراء'},
+    {t: 'بيعرف وين محفوظة بيانات دخول بوابات الموردين ومين بيعطي الصلاحية', miss: true},
+    {t: 'بيطلب الإسمنت بالصيف قبل أسبوعين بدل أسبوع'},
+    {t: 'عنده أرقام المندوبين المباشرة لما الخط الرسمي ما يرد'},
+  ];
+  $('#official').innerHTML = official.map(x => `<li>${esc(x)}</li>`).join('');
+  $('#real').innerHTML = real.map(x => `<li class="${x.miss ? 'miss' : ''}">${esc(x.t)}${x.miss ? '<span class="flag">ناقص بالرسمي</span>' : ''}</li>`).join('');
+  $('#kpi').textContent = `نسبة فواتير ${supplier} اللي انْدفعت قبل يوم ${d} واستفادت من الخصم — الهدف ١٠٠٪ كل شهر.`;
+  $('#iq').textContent = `فاتورة ${supplier} وصلت متأخرة، ويوم ${d} بعد يومين، والمسؤول عن الدفع غايب. شو بتعملي خطوة بخطوة، ومين بتبلّغي؟`;
+  const sugg = [`شو قصة الخصم مع ${supplier}؟`, 'مين بيغطّي الدفعات لما عمر يكون غايب؟', 'وين محفوظة بيانات دخول البوابة؟', 'كيف بنستلم الحديد بالموقع؟', 'شو بنعمل لو المورد بعت فاتورة غلط؟'];
+  $('#sugg').innerHTML = sugg.map(s => `<button type="button">${esc(s)}</button>`).join('');
+}
+$('#supplier').addEventListener('change', renderStatic);
+$('#day').addEventListener('input', renderStatic);
+$('#day').addEventListener('change', () => { $('#day').value = ctx().day; renderStatic(); });
+
+/* ---------- boot ---------- */
+if (!SR && !FALLBACK) $('#pttHint').textContent = 'المتصفح ما بيحوّل الصوت لنص — سجّل واكتب الجواب، أو جرّب Chrome';
+renderStatic();
+updateCounter();
+addRawi(OPENING).then(() => speak(OPENING));
+})();
+</script>
+</body>
+</html>
