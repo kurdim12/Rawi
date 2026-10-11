@@ -415,10 +415,6 @@ svg.icon { width: 20px; height: 20px; flex: none; }
   background: var(--surface); color: var(--ink); font-weight: 600;
   border-color: var(--line); box-shadow: var(--shadow-sm);
 }
-.nav-link[aria-current="page"]::before {
-  content: ""; position: absolute; inset-inline-start: -17px; inset-block: 10px;
-  width: 3px; border-start-end-radius: 3px; border-end-end-radius: 3px; background: var(--ink);
-}
 .nav-link[aria-current="page"] .icon { opacity: 1; }
 .nav-text { flex: 1 1 auto; min-width: 0; }
 .nav-badge {
@@ -483,7 +479,6 @@ svg.icon { width: 20px; height: 20px; flex: none; }
   }
   [dir="ltr"] .sidebar { transform: translateX(-100%); }
   .sidebar.is-open { transform: none; visibility: visible; transition: transform var(--t-slow) var(--ease), visibility 0s; }
-  .nav-link[aria-current="page"]::before { display: none; }
 }
 
 /* --------------------------------------------------------------------------
@@ -495,14 +490,25 @@ svg.icon { width: 20px; height: 20px; flex: none; }
   padding: var(--s-6) var(--gutter) var(--s-9);
   display: flex; flex-direction: column; gap: var(--s-7);
 }
+/* Safety net: any other top-level wrapper in <main> still gets the page container
+   (zero specificity via :where, so page CSS can override it). Use .bleed to opt out. */
+.app-main > :where(:not(.page):not(.bleed):not(script):not(template):not(dialog)) {
+  max-width: calc(var(--content-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding: var(--s-6) var(--gutter) var(--s-9);
+}
 @media (min-width: 640px) { :root { --gutter: 24px; } }
-@media (min-width: 1280px) { :root { --gutter: 40px; } .page { padding-block-start: var(--s-8); } }
+@media (min-width: 1280px) {
+  :root { --gutter: 40px; }
+  .page, .app-main > :where(:not(.page):not(.bleed):not(script):not(template):not(dialog)) { padding-block-start: var(--s-8); }
+}
 
 .page-head { display: grid; gap: var(--s-3); align-items: end; }
 .page-head > * { min-width: 0; }
 @media (min-width: 900px) {
   .page-head { grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--s-7); }
-  .page-head .page-actions { grid-column: 2; grid-row: 1 / span 3; align-self: end; }
+  .page-head > * { grid-column: 1; }
+  .page-head > .page-actions { grid-column: 2; grid-row: 1 / span 4; align-self: end; justify-content: flex-end; }
 }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
@@ -553,6 +559,7 @@ svg.icon { width: 20px; height: 20px; flex: none; }
   .split, .duo { grid-template-columns: 7fr 5fr; align-items: start; gap: var(--s-6); }
   .split.rev { grid-template-columns: 5fr 7fr; }
   .split.even { grid-template-columns: 1fr 1fr; }
+  .split.stretch { align-items: stretch; }
   .split .sticky { position: sticky; inset-block-start: var(--s-6); }
 }
 
@@ -1097,6 +1104,16 @@ button.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--i
 .ptt-bars i:nth-child(4), .ptt-wrap .bars i:nth-child(4), .mp-bars i:nth-child(4) { animation-delay: .36s; }
 .ptt-bars i:nth-child(5), .ptt-wrap .bars i:nth-child(5), .mp-bars i:nth-child(5) { animation-delay: .48s; }
 .is-recording .ptt-label b, .rec .ptt-label b { color: var(--accent-text); }
+/* voice.js: .is-processing while it waits for final results / upload */
+.is-processing .ptt, .ptt.is-processing { cursor: wait; opacity: .85; }
+.is-processing .ptt::after, .ptt.is-processing::after {
+  content: ""; position: absolute; inset: -6px; border-radius: 50%;
+  border: 2px solid transparent; border-block-start-color: var(--accent);
+  animation: rawi-spin .9s linear infinite;
+}
+/* voice.js dictation mic (search / ask boxes) */
+.btn.is-listening { background: var(--accent); border-color: var(--accent); color: var(--on-accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.btn.is-listening .icon { animation: rawi-blink 1.2s ease-in-out infinite; }
 
 /* --------------------------------------------------------------------------
    16. Empty state & skeleton
@@ -1279,7 +1296,8 @@ dialog { color: var(--ink); }
   .ptt-bars i, .ptt-wrap .bars i, .mp-bars i { animation: none !important; }
   .ptt-bars i:nth-child(odd), .ptt-wrap .bars i:nth-child(odd), .mp-bars i:nth-child(odd) { height: 18px; }
   .ptt-bars i:nth-child(even), .ptt-wrap .bars i:nth-child(even), .mp-bars i:nth-child(even) { height: 10px; }
-  .typing-dots i, .health-dot, .chip::before { animation: none !important; opacity: .7; }
+  .typing-dots i, .health-dot, .chip::before, .btn.is-listening .icon { animation: none !important; opacity: .7; }
+  .is-processing .ptt::after, .ptt.is-processing::after { animation: none !important; border-color: var(--accent-line); }
   .skel i, .skel-line { animation: none !important; }
   .kcard.is-highlight, .kcard.pulse { animation: none !important; outline: 3px solid var(--accent); outline-offset: 2px; }
 }
@@ -1288,11 +1306,21 @@ dialog { color: var(--ink); }
    22. Print — content only, light ink on white
    -------------------------------------------------------------------------- */
 @media print {
-  :root, [data-theme] {
-    --bg: #fff; --surface: #fff; --surface-2: #fff; --surface-3: #f3f3f3; --sidebar: #fff;
-    --ink: #000; --ink-2: #333; --ink-3: #555; --line: #bbb; --line-2: #ddd;
-    --shadow: none; --shadow-sm: none; --shadow-lg: none;
+  /* :not(#_) lifts specificity above the prefers-color-scheme block so print is always light */
+  :root:not(#_), [data-theme]:not(#_) {
     color-scheme: light;
+    --bg: #FFFFFF; --surface: #FFFFFF; --surface-2: #FFFFFF; --surface-3: #F3F1ED; --sidebar: #FFFFFF;
+    --ink: #000000; --ink-2: #333333; --ink-3: #555555; --line: #BBBBBB; --line-2: #DDDDDD; --line-strong: #999999;
+    --accent: #B5452F; --accent-text: #A53F2A; --accent-soft: #F6E4DD; --accent-line: #E6C4BA; --on-accent: #FFFFFF;
+    --ok: #5F7F5A; --ok-strong: #52704D; --on-ok: #FFFFFF; --ok-text: #4A6845; --ok-soft: #E6EEE2; --ok-line: #C3D3BD;
+    --warn: #A87A22; --warn-text: #855D12; --warn-soft: #F6EBD3; --warn-line: #E3CC97;
+    --risk: #A8343F; --risk-text: #9A2C38; --risk-soft: #F7E2E2; --risk-line: #E8C0C2;
+    --info: #3F6E86; --info-text: #35607A; --info-soft: #E3EDF2; --info-line: #BFD3DE;
+    --hl: #F3E8D2; --hl-line: #E2CFA6; --hl-text: #6B5A36;
+    --tint-1-bg: #EFE3CC; --tint-1-fg: #6B5226; --tint-2-bg: #DDE7D8; --tint-2-fg: #3F5A3A;
+    --tint-3-bg: #DCE4EA; --tint-3-fg: #34505F; --tint-4-bg: #EADBE3; --tint-4-fg: #6A3A55;
+    --tint-5-bg: #E4E0DA; --tint-5-fg: #4A453D; --tint-6-bg: #D6E8E4; --tint-6-fg: #2F5A52;
+    --shadow: none; --shadow-sm: none; --shadow-lg: none;
   }
   body { background: #fff; font-size: 12pt; line-height: 1.6; }
   .app { display: block !important; }

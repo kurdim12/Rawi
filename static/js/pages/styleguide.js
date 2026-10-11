@@ -280,7 +280,8 @@
         `<div class="sg-sparks">
           <div><span class="small muted">جلسات · ١٤ يوم</span>${ui.sparkline([0, 1, 0, 2, 1, 1, 3, 0, 2, 1, 2, 3, 1, 2], { w: 160, h: 36 })}</div>
           <div><span class="small muted">بطاقات معتمدة</span>${ui.sparkline([1, 2, 2, 3, 5, 5, 6, 8, 9, 9, 11, 12, 14, 15], { w: 160, h: 36, kind: 'ok' })}</div>
-        </div>`,
+        </div>
+        <p class="xsmall faint">الزمن بيمشي مع القراءة: الأقدم عاليمين، والنقطة هي اليوم.</p>`,
       ].join('');
     }
   }

@@ -211,8 +211,13 @@
     return Math.round((a - b) / DAY_MS);
   }
 
-  /** "يوم/يومين/٣ أيام/١١ يوم" — Jordanian counting. */
+  /**
+   * Day count in Jordanian Arabic: "يوم" / "يومين" / "٣ أيام" / "١١ يوم".
+   * @param {number} n
+   * @returns {string}
+   */
   function daysPhrase(n) {
+    n = Math.round(Number(n) || 0);
     n = Math.abs(n);
     if (n === 1) return 'يوم';
     if (n === 2) return 'يومين';
@@ -549,6 +554,8 @@
     if (o.compact) cls.push('compact');
     if (o.highlight) cls.push('is-highlight');
 
+    let endUsed = false;
+    const endCls = () => { if (endUsed) return ''; endUsed = true; return ' kact-end'; };
     const btns = actions.map((a) => {
       if (a === 'listen') {
         if (!c.audio_url) return '';
@@ -563,8 +570,8 @@
         const on = status === 'rejected';
         return `<button class="btn sm ${on ? 'reject' : 'danger'}" type="button" data-action="reject" aria-pressed="${on}" data-next-status="${on ? 'pending' : 'rejected'}">${on ? 'مرفوضة' : 'رفض'}</button>`;
       }
-      if (a === 'edit') return `<button class="btn sm ghost" type="button" data-action="edit">${ICONS.edit}تعديل</button>`;
-      if (a === 'open') return `<button class="btn sm ghost kact-end" type="button" data-action="open">التفاصيل${ICONS.chevron}</button>`;
+      if (a === 'edit') return `<button class="btn sm ghost${endCls()}" type="button" data-action="edit">${ICONS.edit}تعديل</button>`;
+      if (a === 'open') return `<button class="btn sm ghost${endCls()}" type="button" data-action="open">التفاصيل${ICONS.chevron}</button>`;
       return '';
     }).join('');
 
@@ -909,6 +916,7 @@
   const audio = {
     /**
      * Play a recording in the shared player and show «عم تسمع {label}…».
+     * Calling it again with the recording that is playing stops it (toggle).
      * @param {string} url
      * @param {{label?: string}} [opts]
      * @returns {Promise<boolean>} true when playback started
@@ -917,11 +925,16 @@
       if (!url) return Promise.resolve(false);
       ensurePlayer();
       if (!audioEl) return Promise.resolve(false);
+      if (audioEl.dataset.url === url && !audioEl.paused && audioEl.getAttribute('src')) {
+        audio.stop();                                    // same recording again = stop (toggle)
+        return Promise.resolve(false);
+      }
       cancelSpeech();
       const token = ++audioToken;
       audioLabel = (opts && opts.label) || 'التسجيل';
       try { audioEl.pause(); } catch (_) { /* ignore */ }
       audioEl.dataset.token = String(token);
+      audioEl.dataset.url = url;
       audioEl.src = url;
       showPlayer(audioLabel);
       markPlaying(url);
@@ -941,6 +954,7 @@
       if (audioEl) {
         try { audioEl.pause(); } catch (_) { /* ignore */ }
         audioEl.removeAttribute('src');
+        delete audioEl.dataset.url;
         try { audioEl.load(); } catch (_) { /* ignore */ }
       }
       hidePlayer();
@@ -1202,7 +1216,7 @@
      Export
      ------------------------------------------------------------------------ */
   Object.assign(R, {
-    $, $$, esc, rich, ar, num, jod, pct, date, relDay, duration, mask, sleep, today, dayDiff, firstName,
+    $, $$, esc, rich, ar, num, jod, pct, date, relDay, duration, mask, sleep, today, dayDiff, daysPhrase, firstName,
     MASK, MONTHS, WEEKDAYS,
     api, store, toast, audio, speak, typeInto, theme,
     icons: Object.assign(R.icons || {}, ICONS),
